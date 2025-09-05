@@ -1,0 +1,273 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+    Name = "中脚本",
+    LoadingTitle = "脚本正在加载...",
+    LoadingSubtitle = "此脚本由3403over制作",
+    ShowText = "打开脚本<",
+    Theme = "Serenity", -- But you can also change to Default, DarkBlue, Bloom, etc.
+    ToggleUIKeybind = "K"
+})
+
+local Tab1 = Window:CreateTab("通用", 4483362458)
+Tab1:CreateSection("通常用的懂的都懂，但是不多，后面会更新")
+
+Tab1:CreateButton({
+    Name = "指令挂",
+    Callback = function()
+        loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+    end
+})
+
+Tab1:CreateButton({
+    Name = "飞行",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/dingding123hhh/tt/main/jm%E9%A3%9E..lua"))()
+    end
+})
+
+Tab1:CreateButton({
+    Name = "光影V4",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/MZEEN2424/Graphics/main/Graphics.xml"))()
+    end
+})
+
+Tab1:CreateButton({
+    Name = "键盘",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt", true))()
+    end
+})
+
+Tab1:CreateButton({
+    Name = "玩家加入游戏提示",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/boyscp/scriscriptsc/main/bbn.lua"))()
+    end
+})
+
+Tab1:CreateButton({
+    Name = "穿墙（不建议用）",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/TtmScripter/OtherScript/main/Noclip"))()
+    end
+})
+
+local Tab2 = Window:CreateTab("其他脚本", "rewind")
+Tab2:CreateSection("其他脚本中心，或者其他游戏脚本")
+
+Tab2:CreateButton({
+    Name = "kanl脚本",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/dream77239/kanl/refs/heads/main/Kanl%E8%84%9A%E6%9C%AC"))()
+    end
+})
+
+Tab2:CreateButton({
+    Name = "天空脚本中心正式版",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/hdjsjjdgrhj/script-hub/refs/heads/main/skyhub"))()
+    end
+})
+
+Tab2:CreateButton({
+    Name = "情云脚本",
+    Callback = function()
+        loadstring(utf8.char((function() return table.unpack({108,111,97,100,115,116,114,105,110,103,40,103,97,109,101,58,72,116,116,112,71,101,116,40,34,104,116,116,112,115,58,47,47,114,97,119,46,103,105,116,104,117,98,117,115,101,114,99,111,110,116,101,110,116,46,99,111,109,47,67,104,105,110,97,81,89,47,45,47,109,97,105,110,47,37,69,54,37,56,51,37,56,53,37,69,52,37,66,65,37,57,49,34,41,41,40,41})end)()))()
+    end
+})
+
+Tab2:CreateButton({
+    Name = "神青脚本中心V6",
+    Callback = function()
+        loadstring("\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\34\104\116\116\112\115\58\47\47\114\97\119\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\103\121\99\103\99\104\103\121\102\121\116\100\116\116\114\47\115\104\101\110\113\105\110\47\114\101\102\115\47\104\101\97\100\115\47\109\97\105\110\47\115\104\105\110\113\105\110\101\110\98\54\54\54\46\116\120\116\34\41\41\40\41")()
+    end
+})
+
+Tab2:CreateButton({
+    Name = "叶脚本",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/roblox-ye/QQ515966991/refs/heads/main/ROBLOX-CNVIP-XIAOYE.lua"))()
+    end
+})
+
+local Tab3 = Window:CreateTab("注入器信息", 4483362458)
+Tab3:CreateSection("显示你正在使用的执行器")
+
+local executorName = "未知注入器"
+if identifyexecutor then
+    local success, name = pcall(identifyexecutor)
+    if success and name then
+        executorName = tostring(name)
+    end
+end
+
+local mobileExecutors = {
+    ["krnl"] = "krnl (手机版可用)",
+    ["ninjainjector"] = "忍者注入器 (Ninja Executor)",
+    ["arceus"] = "阿尔宙斯注入器 (Arceus X)",
+    ["fluxus"] = "Fluxus (PC/手机)",
+    ["codex"] = "Codex Executor",
+    ["delta"] = "Delta Executor",
+    ["vega"] = "Vega X"
+}
+
+for key, value in pairs(mobileExecutors) do
+    if string.find(string.lower(executorName), key) then
+        executorName = value
+        break
+    end
+end
+
+Tab3:CreateLabel("当前注入器: " .. executorName)
+
+local supportedAPIs = {}
+local checkAPIs = {
+    "syn",
+    "gethui",
+    "getgc",
+    "getloadedmodules",
+    "getconnections",
+    "getcallingscript",
+    "hookfunction",
+    "setclipboard",
+    "firesignal",
+    "fireclickdetector"
+}
+
+for _, api in ipairs(checkAPIs) do
+    if getfenv()[api] ~= nil then
+        table.insert(supportedAPIs, api)
+    end
+end
+
+local apiText = (#supportedAPIs > 0 and table.concat(supportedAPIs, ", ") or "未检测到特殊API")
+Tab3:CreateLabel("支持的API: " .. apiText)
+
+Tab3:CreateButton({
+    Name = "复制注入器名称",
+    Callback = function()
+        if setclipboard then
+            setclipboard(executorName)
+            Rayfield:Notify({
+                Title = "提示",
+                Content = "已复制注入器名称到剪贴板!",
+                Duration = 4,
+                Image = 4483362458
+            })
+        else
+            Rayfield:Notify({
+                Title = "提示",
+                Content = "当前环境不支持复制功能!",
+                Duration = 4,
+                Image = 4483362458
+            })
+        end
+    end
+})
+
+Tab3:CreateButton({
+    Name = "复制作者QQ号",
+    Callback = function()
+        if setclipboard then
+            setclipboard("2031782454")
+            Rayfield:Notify({
+                Title = "提示",
+                Content = "已复制作者QQ号: 2031782454",
+                Duration = 4,
+                Image = 4483362458
+            })
+        else
+            Rayfield:Notify({
+                Title = "提示",
+                Content = "当前环境不支持复制功能!",
+                Duration = 4,
+                Image = 4483362458
+            })
+        end
+    end
+})
+
+Tab3:CreateButton({
+    Name = "导出全部注入器信息",
+    Callback = function()
+        if setclipboard then
+            local info = "注入器: " .. executorName .. "\n支持的API: " .. apiText
+            setclipboard(info)
+            Rayfield:Notify({
+                Title = "提示",
+                Content = "已导出注入器信息到剪贴板!",
+                Duration = 4,
+                Image = 4483362458
+            })
+        else
+            Rayfield:Notify({
+                Title = "提示",
+                Content = "当前环境不支持复制功能!",
+                Duration = 4,
+                Image = 4483362458
+            })
+        end
+    end
+})
+
+Tab3:CreateSection("Roblox 账户信息")
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local username = LocalPlayer.Name
+local displayName = LocalPlayer.DisplayName
+local userId = LocalPlayer.UserId
+local avatarUrl = "https://www.roblox.com/headshot-thumbnail/image?userId="..userId.."&width=420&height=420&format=png"
+
+Tab3:CreateLabel("用户名: " .. username)
+Tab3:CreateLabel("昵称: " .. displayName)
+Tab3:CreateLabel("用户ID: " .. userId)
+Tab3:CreateLabel("头像链接: " .. avatarUrl)
+
+Tab3:CreateButton({
+    Name = "复制账户信息",
+    Callback = function()
+        if setclipboard then
+            local info = "用户名: " .. username ..
+                         "\n昵称: " .. displayName ..
+                         "\n用户ID: " .. userId ..
+                         "\n头像: " .. avatarUrl
+            setclipboard(info)
+            Rayfield:Notify({
+                Title = "提示",
+                Content = "已复制账户信息到剪贴板!",
+                Duration = 4,
+                Image = 4483362458
+            })
+        else
+            Rayfield:Notify({
+                Title = "提示",
+                Content = "当前环境不支持复制功能!",
+                Duration = 4,
+                Image = 4483362458
+            })
+        end
+    end
+})
+
+Tab3:CreateButton({
+    Name = "打开头像网页",
+    Callback = function()
+        Rayfield:Notify({
+            Title = "提示",
+            Content = "头像链接: " .. avatarUrl,
+            Duration = 6,
+            Image = 4483362458
+        })
+    end
+})
+
+Rayfield:Notify({
+    Title = "中脚本",
+    Content = "加载完成",
+    Duration = 6.5,
+    Image = 4483362458,
+})
