@@ -3,7 +3,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Window = Rayfield:CreateWindow({
     Name = "中脚本",
     LoadingTitle = "脚本正在加载...",
-    LoadingSubtitle = "此脚本由3403over制作",
+    LoadingSubtitle = "此脚本由3403over+猫制作",
     ShowText = "打开脚本<",
     Theme = "Serenity", -- But you can also change to Default, DarkBlue, Bloom, etc.
     ToggleUIKeybind = "K"
@@ -89,6 +89,27 @@ Tab2:CreateButton({
     Name = "叶脚本",
     Callback = function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/roblox-ye/QQ515966991/refs/heads/main/ROBLOX-CNVIP-XIAOYE.lua"))()
+    end
+})
+
+Tab2:CreateButton({
+    Name = "null门 英语",
+    Callback = function()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/DOORS-NullFire-BETA-35449"))()
+    end
+})
+
+Tab2:CreateButton({
+    Name = "皮脚本也是国内最强缝合",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/xiaopi77/xiaopi77/main/QQ1002100032-Roblox-Pi-script.lua"))()
+    end
+})
+
+Tab2:CreateButton({
+    Name = "神秘👽要卡密但是免费的",
+    Callback = function()
+        loadstring(game:HttpGet('https://lunor.dev/loader'))()
     end
 })
 
@@ -266,8 +287,15 @@ Tab3:CreateButton({
 })
 
 Rayfield:Notify({
-    Title = "中脚本",
+    Title = "中脚本V1版",
     Content = "加载完成",
+    Duration = 6.5,
+    Image = 4483362458,
+})
+
+Rayfield:Notify({
+    Title = "是脚本由FAHjk114514",
+    Content = "qwertyuiom6667一起完成",
     Duration = 6.5,
     Image = 4483362458,
 })
