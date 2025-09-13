@@ -89,6 +89,13 @@ Tab2:CreateButton({ Name = "叶脚本", Callback = function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/roblox-ye/QQ515966991/refs/heads/main/ROBLOX-CNVIP-XIAOYE.lua"))()
 end})
 
+Tab2:CreateButton({
+    Name = "null doors 英文",
+    Callback = function()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/DOORS-NullFire-BETA-35449"))()
+    end
+})
+
 local Tab3 = Window:CreateTab("注入器信息", 4483362458)
 Tab3:CreateSection("显示你正在使用的执行器")
 
