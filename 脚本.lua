@@ -1,476 +1,367 @@
-local main = Instance.new("ScreenGui")
-local Frame = Instance.new("Frame")
-local up = Instance.new("TextButton")
-local down = Instance.new("TextButton")
-local onof = Instance.new("TextButton")
-local TextLabel = Instance.new("TextLabel")
-local plus = Instance.new("TextButton")
-local speed = Instance.new("TextLabel")
-local mine = Instance.new("TextButton")
-local closebutton = Instance.new("TextButton")
-local mini = Instance.new("TextButton")
-local mini2 = Instance.new("TextButton")
-
-main.Name = "main"
-main.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-main.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-main.ResetOnSpawn = false
-
-Frame.Parent = main
-Frame.BackgroundColor3 = Color3.fromRGB(163, 255, 137)
-Frame.BorderColor3 = Color3.fromRGB(103, 221, 213)
-Frame.Position = UDim2.new(0.100320168, 0, 0.379746825, 0)
-Frame.Size = UDim2.new(0, 190, 0, 57)
-
-up.Name = "飞上去"
-up.Parent = Frame
-up.BackgroundColor3 = Color3.fromRGB(79, 255, 152)
-up.Size = UDim2.new(0, 44, 0, 28)
-up.Font = Enum.Font.SourceSans
-up.Text = "飞下去"
-up.TextColor3 = Color3.fromRGB(0, 0, 0)
-up.TextSize = 14.000
-
-down.Name = "720558437"
-down.Parent = Frame
-down.BackgroundColor3 = Color3.fromRGB(215, 255, 121)
-down.Position = UDim2.new(0, 0, 0.491228074, 0)
-down.Size = UDim2.new(0, 44, 0, 28)
-down.Font = Enum.Font.SourceSans
-down.Text = "down"
-down.TextColor3 = Color3.fromRGB(0, 0, 0)
-down.TextSize = 14.000
-
-onof.Name = "onof"
-onof.Parent = Frame
-onof.BackgroundColor3 = Color3.fromRGB(255, 249, 74)
-onof.Position = UDim2.new(0.702823281, 0, 0.491228074, 0)
-onof.Size = UDim2.new(0, 56, 0, 28)
-onof.Font = Enum.Font.SourceSans
-onof.Text = "飞"
-onof.TextColor3 = Color3.fromRGB(0, 0, 0)
-onof.TextSize = 14.000
-
-TextLabel.Parent = Frame
-TextLabel.BackgroundColor3 = Color3.fromRGB(242, 60, 255)
-TextLabel.Position = UDim2.new(0.469327301, 0, 0, 0)
-TextLabel.Size = UDim2.new(0, 100, 0, 28)
-TextLabel.Font = Enum.Font.SourceSans
-TextLabel.Text = "中脚本"
-TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel.TextScaled = true
-TextLabel.TextSize = 14.000
-TextLabel.TextWrapped = true
-
-plus.Name = "plus"
-plus.Parent = Frame
-plus.BackgroundColor3 = Color3.fromRGB(133, 145, 255)
-plus.Position = UDim2.new(0.231578946, 0, 0, 0)
-plus.Size = UDim2.new(0, 45, 0, 28)
-plus.Font = Enum.Font.SourceSans
-plus.Text = "+"
-plus.TextColor3 = Color3.fromRGB(0, 0, 0)
-plus.TextScaled = true
-plus.TextSize = 14.000
-plus.TextWrapped = true
-
-speed.Name = "speed"
-speed.Parent = Frame
-speed.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
-speed.Position = UDim2.new(0.468421042, 0, 0.491228074, 0)
-speed.Size = UDim2.new(0, 44, 0, 28)
-speed.Font = Enum.Font.SourceSans
-speed.Text = "1"
-speed.TextColor3 = Color3.fromRGB(0, 0, 0)
-speed.TextScaled = true
-speed.TextSize = 14.000
-speed.TextWrapped = true
-
-mine.Name = "mine"
-mine.Parent = Frame
-mine.BackgroundColor3 = Color3.fromRGB(123, 255, 247)
-mine.Position = UDim2.new(0.231578946, 0, 0.491228074, 0)
-mine.Size = UDim2.new(0, 45, 0, 29)
-mine.Font = Enum.Font.SourceSans
-mine.Text = "-"
-mine.TextColor3 = Color3.fromRGB(0, 0, 0)
-mine.TextScaled = true
-mine.TextSize = 14.000
-mine.TextWrapped = true
-
-closebutton.Name = "Close"
-closebutton.Parent = main.Frame
-closebutton.BackgroundColor3 = Color3.fromRGB(225, 25, 0)
-closebutton.Font = "SourceSans"
-closebutton.Size = UDim2.new(0, 45, 0, 28)
-closebutton.Text = "X"
-closebutton.TextSize = 30
-closebutton.Position =  UDim2.new(0, 0, -1, 27)
-
-mini.Name = "minimize"
-mini.Parent = main.Frame
-mini.BackgroundColor3 = Color3.fromRGB(192, 150, 230)
-mini.Font = "SourceSans"
-mini.Size = UDim2.new(0, 45, 0, 28)
-mini.Text = "T"
-mini.TextSize = 30
-mini.Position = UDim2.new(0, 44, -1, 27)
-
-mini2.Name = "minimize2"
-mini2.Parent = main.Frame
-mini2.BackgroundColor3 = Color3.fromRGB(192, 150, 230)
-mini2.Font = "SourceSans"
-mini2.Size = UDim2.new(0, 45, 0, 28)
-mini2.Text = "T"
-mini2.TextSize = 30
-mini2.Position = UDim2.new(0, 44, -1, 57)
-mini2.Visible = false
-
-speeds = 1
-
-local speaker = game:GetService("Players").LocalPlayer
-
-local chr = game.Players.LocalPlayer.Character
-local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
-
-nowe = false
-
-game:GetService("StarterGui"):SetCore("SendNotification", { 
-	Title = "禁漫中心";
-	Text = "lnjection succeeded";
-	Icon = "rbxthumb://type=Asset&id=5107182114&w=150&h=150"})
-Duration = 5;
-
-Frame.Active = true -- main = gui
-Frame.Draggable = true
-
-onof.MouseButton1Down:connect(function()
-
-	if nowe == true then
-		nowe = false
-
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Running,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,true)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming,true)
-		speaker.Character.Humanoid:ChangeState(Enum.HumanoidStateType.RunningNoPhysics)
-	else 
-		nowe = true
-
-
-
-		for i = 1, speeds do
-			spawn(function()
-
-				local hb = game:GetService("RunService").Heartbeat	
-
-
-				tpwalking = true
-				local chr = game.Players.LocalPlayer.Character
-				local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
-				while tpwalking and hb:Wait() and chr and hum and hum.Parent do
-					if hum.MoveDirection.Magnitude > 0 then
-						chr:TranslateBy(hum.MoveDirection)
-					end
-				end
-
-			end)
-		end
-		game.Players.LocalPlayer.Character.Animate.Disabled = true
-		local Char = game.Players.LocalPlayer.Character
-		local Hum = Char:FindFirstChildOfClass("Humanoid") or Char:FindFirstChildOfClass("AnimationController")
-
-		for i,v in next, Hum:GetPlayingAnimationTracks() do
-			v:AdjustSpeed(0)
-		end
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Running,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,false)
-		speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming,false)
-		speaker.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Swimming)
-	end
-
-
-
-
-	if game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R6 then
-
-
-
-		local plr = game.Players.LocalPlayer
-		local torso = plr.Character.Torso
-		local flying = true
-		local deb = true
-		local ctrl = {f = 0, b = 0, l = 0, r = 0}
-		local lastctrl = {f = 0, b = 0, l = 0, r = 0}
-		local maxspeed = 50
-		local speed = 0
-
-
-		local bg = Instance.new("BodyGyro", torso)
-		bg.P = 9e4
-		bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
-		bg.cframe = torso.CFrame
-		local bv = Instance.new("BodyVelocity", torso)
-		bv.velocity = Vector3.new(0,0.1,0)
-		bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
-		if nowe == true then
-			plr.Character.Humanoid.PlatformStand = true
-		end
-		while nowe == true or game:GetService("Players").LocalPlayer.Character.Humanoid.Health == 0 do
-			game:GetService("RunService").RenderStepped:Wait()
-
-			if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
-				speed = speed+.5+(speed/maxspeed)
-				if speed > maxspeed then
-					speed = maxspeed
-				end
-			elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
-				speed = speed-1
-				if speed < 0 then
-					speed = 0
-				end
-			end
-			if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
-				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
-				lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
-			elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
-				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
-			else
-				bv.velocity = Vector3.new(0,0,0)
-			end
-			--	game.Players.LocalPlayer.Character.Animate.Disabled = true
-			bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0)
-		end
-		ctrl = {f = 0, b = 0, l = 0, r = 0}
-		lastctrl = {f = 0, b = 0, l = 0, r = 0}
-		speed = 0
-		bg:Destroy()
-		bv:Destroy()
-		plr.Character.Humanoid.PlatformStand = false
-		game.Players.LocalPlayer.Character.Animate.Disabled = false
-		tpwalking = false
-
-
-
-
-	else
-	local plr = game.Players.LocalPlayer
-		local UpperTorso = plr.Character.UpperTorso
-		local flying = true
-		local deb = true
-		local ctrl = {f = 0, b = 0, l = 0, r = 0}
-		local lastctrl = {f = 0, b = 0, l = 0, r = 0}
-		local maxspeed = 50
-		local speed = 0
-
-
-		local bg = Instance.new("BodyGyro", UpperTorso)
-		bg.P = 9e4
-		bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
-		bg.cframe = UpperTorso.CFrame
-		local bv = Instance.new("BodyVelocity", UpperTorso)
-		bv.velocity = Vector3.new(0,0.1,0)
-		bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
-		if nowe == true then
-			plr.Character.Humanoid.PlatformStand = true
-		end
-		while nowe == true or game:GetService("Players").LocalPlayer.Character.Humanoid.Health == 0 do
-			wait()
-
-			if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
-				speed = speed+.5+(speed/maxspeed)
-				if speed > maxspeed then
-					speed = maxspeed
-				end
-			elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
-				speed = speed-1
-				if speed < 0 then
-					speed = 0
-				end
-			end
-			if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
-				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
-				lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
-			elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
-				bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
-			else
-				bv.velocity = Vector3.new(0,0,0)
-			end
-
-			bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0)
-		end
-		ctrl = {f = 0, b = 0, l = 0, r = 0}
-		lastctrl = {f = 0, b = 0, l = 0, r = 0}
-		speed = 0
-		bg:Destroy()
-		bv:Destroy()
-		plr.Character.Humanoid.PlatformStand = false
-		game.Players.LocalPlayer.Character.Animate.Disabled = false
-		tpwalking = false
-
-
-
-	end
-
-
-
-
-
-end)
-
-local tis
-
-up.MouseButton1Down:connect(function()
-	tis = up.MouseEnter:connect(function()
-		while tis do
-			wait()
-			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,1,0)
-		end
-	end)
-end)
-
-up.MouseLeave:connect(function()
-	if tis then
-		tis:Disconnect()
-		tis = nil
-	end
-end)
-
-local dis
-
-down.MouseButton1Down:connect(function()
-	dis = down.MouseEnter:connect(function()
-		while dis do
-			wait()
-			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,-1,0)
-		end
-	end)
-end)
-
-down.MouseLeave:connect(function()
-	if dis then
-		dis:Disconnect()
-		dis = nil
-	end
-end)
-
-
-game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(char)
-	wait(0.7)
-	game.Players.LocalPlayer.Character.Humanoid.PlatformStand = false
-	game.Players.LocalPlayer.Character.Animate.Disabled = false
-
-end)
-
-
-plus.MouseButton1Down:connect(function()
-	speeds = speeds + 1
-	speed.Text = speeds
-	if nowe == true then
-
-
-		tpwalking = false
-		for i = 1, speeds do
-			spawn(function()
-
-				local hb = game:GetService("RunService").Heartbeat	
-
-
-				tpwalking = true
-				local chr = game.Players.LocalPlayer.Character
-				local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
-				while tpwalking and hb:Wait() and chr and hum and hum.Parent do
-					if hum.MoveDirection.Magnitude > 0 then
-						chr:TranslateBy(hum.MoveDirection)
-					end
-				end
-
-			end)
-		end
-	end
-end)
-mine.MouseButton1Down:connect(function()
-	if speeds == 1 then
-		speed.Text = 'flyno1'
-		wait(1)
-		speed.Text = speeds
-	else
-		speeds = speeds - 1
-		speed.Text = speeds
-		if nowe == true then
-			tpwalking = false
-			for i = 1, speeds do
-				spawn(function()
-
-					local hb = game:GetService("RunService").Heartbeat	
-
-
-					tpwalking = true
-					local chr = game.Players.LocalPlayer.Character
-					local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
-					while tpwalking and hb:Wait() and chr and hum and hum.Parent do
-						if hum.MoveDirection.Magnitude > 0 then
-							chr:TranslateBy(hum.MoveDirection)
-						end
-					end
-
-				end)
-			end
-		end
-	end
-end)
-
-
-closebutton.MouseButton1Click:Connect(function()
-	main:Destroy()
-end)
-
-mini.MouseButton1Click:Connect(function()
-	up.Visible = false
-	down.Visible = false
-	onof.Visible = false
-	plus.Visible = false
-	speed.Visible = false
-	mine.Visible = false
-	mini.Visible = false
-	mini2.Visible = true
-	main.Frame.BackgroundTransparency = 1
-	closebutton.Position =  UDim2.new(0, 0, -1, 57)
-end)
-
-mini2.MouseButton1Click:Connect(function()
-	up.Visible = true
-	down.Visible = true
-	onof.Visible = true
-	plus.Visible = true
-	speed.Visible = true
-	mine.Visible = true
-	mini.Visible = true
-	mini2.Visible = false
-	main.Frame.BackgroundTransparency = 0 
-	closebutton.Position =  UDim2.new(0, 0, -1, 27)
-end)"
- https://raw.githubusercontent.com/dingding123hhh/tt/main/jm%E9%A3%9E..lua#:~:text=local%20main%20%3D%20Instance,1%2C%2027)%0Aend)
+-- i got suggested to jst put this in github blah blah whatever heres ur code
+
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+-- hi if ur seeing the source code also alan used to like skibidi toilet tower defense alot (dont tell him i said this)
+
+local Window = Rayfield:CreateWindow({
+   Name = "XCHain - 2.6.5",
+   Icon = 16310770488, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+   LoadingTitle = "Chain mods when Neonicf is lazy on script",
+   LoadingSubtitle = "by Neonicf/Notezfc & Alan",
+   Theme = {
+    TextColor = Color3.fromRGB(143, 46, 62),
+
+    Background = Color3.fromRGB(3, 2, 2),
+    Topbar = Color3.fromRGB(0, 0, 0),
+    Shadow = Color3.fromRGB(82, 29, 29),
+
+    NotificationBackground = Color3.fromRGB(0, 0, 0),
+    NotificationActionsBackground = Color3.fromRGB(207, 204, 204),
+
+    TabBackground = Color3.fromRGB(0, 0, 0),
+    TabStroke = Color3.fromRGB(255, 255, 255),
+    TabBackgroundSelected = Color3.fromRGB(0, 0, 0),
+    TabTextColor = Color3.fromRGB(255, 230, 255),
+    SelectedTabTextColor = Color3.fromRGB(230, 230, 230),
+
+    ElementBackground = Color3.fromRGB(0, 0, 0),
+    ElementBackgroundHover = Color3.fromRGB(0, 0, 0),
+    SecondaryElementBackground = Color3.fromRGB(0, 0, 0),
+    ElementStroke = Color3.fromRGB(71, 24, 24),
+    SecondaryElementStroke = Color3.fromRGB(71, 24, 24),
+            
+    SliderBackground = Color3.fromRGB(0, 0, 0),
+    SliderProgress = Color3.fromRGB(0, 0, 0),
+    SliderStroke = Color3.fromRGB(230, 230, 230),
+
+    ToggleBackground = Color3.fromRGB(0, 0, 0),
+    ToggleEnabled = Color3.fromRGB(207, 204, 204),
+    ToggleDisabled = Color3.fromRGB(255, 255, 255),
+    ToggleEnabledStroke = Color3.fromRGB(0, 0, 0),
+    ToggleDisabledStroke = Color3.fromRGB(0, 0, 0),
+    ToggleEnabledOuterStroke = Color3.fromRGB(71, 24, 24),
+    ToggleDisabledOuterStroke = Color3.fromRGB(71, 24, 24),
+
+    DropdownSelected = Color3.fromRGB(71, 24, 24),
+    DropdownUnselected = Color3.fromRGB(0, 0, 0),
+
+    InputBackground = Color3.fromRGB(0, 0, 0),
+    InputStroke = Color3.fromRGB(65, 65, 65),
+    PlaceholderColor = Color3.fromRGB(71, 24, 24)
+}, -- Check https://docs.sirius.menu/rayfield/configuration/themes
+
+   DisableRayfieldPrompts = false,
+   DisableBuildWarnings = false, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
+
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = XCHain, -- Create a custom folder for your hub/game
+      FileName = "Chain script - Made by Neonicf, an ios user"
+   },
+
+   Discord = {
+      Enabled = true, -- Prompt the user to join your Discord server if their executor supports it
+      Invite = "UG7bH5QUVA", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
+
+   KeySystem = false, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Untitled",
+      Subtitle = "Key System",
+      Note = "No method of obtaining the key is provided", -- Use this to tell the user how to get a key
+      FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
+})
+
+local Tab = Window:CreateTab("Main Tab</>", "syringe") -- Title, Image
+
+local Section = Tab:CreateSection("Windows users may get kicked due to anti cheat in Chain")
+
+local Button = Tab:CreateButton({
+   Name = "Remove Adonis anticheat",
+   Callback = function()
+      local adonis = "https://raw.githubusercontent.com/Pixeluted/adoniscries/refs/heads/main/Source.lua"
+            loadstring(game:HttpGet(adonis))()
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+local Divider = Tab:CreateDivider()
+
+local Label = Tab:CreateLabel("discord server incase u missed notification! | discord.gg/UG7bH5QUVA", "brush")
+
+local Button = Tab:CreateButton({
+   Name = "Copy discord invite link",
+   Callback = function()
+      setclipboard("discord.gg/UG7bH5QUVA")
+      Rayfield:Notify({
+   Title = "Successfully copied to clipboard",
+   Content = "Yippie",
+   Duration = 7,
+   Image = 119775677237737,
+})
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Destroy UI",
+   Callback = function()
+		Rayfield:Destroy()
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+local Divider = Tab:CreateDivider()
+
+local Button = Tab:CreateButton({
+   Name = "Chapter 1 script by Neonicf",
+   Callback = function()
+      local xchainc1 = "https://pastebin.com/raw/0uW4VrYy"
+      loadstring(game:HttpGet(xchainc1))()
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+local Divider = Tab:CreateDivider()
+
+local Button = Tab:CreateButton({
+   Name = "Print Chainsaw is funny chain",
+   Callback = function()
+		print("Chainsaw is funny chain.. you really checked your console huh? well idk, funfact: Lemons float in water but limes sink in water")
+      Rayfield:Notify({
+   Title = "Printed",
+   Content = "check console trust",
+   Duration = 0.5,
+   Image = 12931490629,
+})
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+local ColorPicker = Tab:CreateColorPicker({
+    Name = "Random color picker idk",
+    Color = Color3.fromRGB(255,255,255),
+    Flag = "ColorPicker1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        -- The function that takes place every time the color picker is moved/changed
+        -- The variable (Value) is a Color3fromRGB value based on which color is selected
+    end
+})
+
+local Divider = Tab:CreateDivider()
+
+Rayfield:Notify({
+   Title = "Funfact",
+   Content = "Nëonicf is an iOS user, & Alan is a Windows user | Join my Discord at dsc.gg/UG7bH5QUVA",
+   Duration = 11.5,
+   Image = 13710496582
+})
+
+
+
+local Tab = Window:CreateTab("Combat", "axe") -- Title, Image
+
+local Section = Tab:CreateSection("some of these might be bugged or unstable")
+
+local Divider = Tab:CreateDivider()
+
+local infiniteStaminaEnabled = false
+local staminaLoopConnection = nil
+
+local Toggle = Tab:CreateToggle({
+   Name = "Inf Stamina",
+   CurrentValue = false,
+   Flag = "Toggle1",
+   Callback = function(Value)
+      infiniteStaminaEnabled = Value
+
+      if infiniteStaminaEnabled then
+         staminaLoopConnection = game:GetService("RunService").Heartbeat:Connect(function()
+            if game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("Stats") and game.Players.LocalPlayer.Character.Stats:FindFirstChild("Stamina") then
+               game.Players.LocalPlayer.Character.Stats.Stamina.Value = 100
+            end
+         end)
+      else
+         if staminaLoopConnection then
+            staminaLoopConnection:Disconnect()
+            staminaLoopConnection = nil
+         end
+      end
+   end,
+})
+
+
+local infiniteCombatStaminaEnabled = false
+local combatStaminaLoopConnection = nil
+
+local Toggle = Tab:CreateToggle({
+   Name = "Inf Combat Stamina",
+   CurrentValue = false,
+   Flag = "InfCom",
+   Callback = function(Value)
+      infiniteCombatStaminaEnabled = Value
+
+      if infiniteCombatStaminaEnabled then
+         combatStaminaLoopConnection = game:GetService("RunService").Heartbeat:Connect(function()
+            if game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("Stats") and game.Players.LocalPlayer.Character.Stats:FindFirstChild("CombatStamina") then
+               game.Players.LocalPlayer.Character.Stats.CombatStamina.Value = 100
+            end
+         end)
+      else
+         if combatStaminaLoopConnection then
+            combatStaminaLoopConnection:Disconnect()
+            combatStaminaLoopConnection = nil
+         end
+      end
+   end,
+})
+
+local Slider = Tab:CreateSlider({
+   Name = "Tomahawk AttackSpeed",
+   Range = {0, 100},
+   Increment = 1,
+   Suffix = "pls slide",
+   CurrentValue = 0,
+   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+      ReplicatedStorage.ItemInfo.Tomahawk:SetAttribute("Speed", Value)
+   -- The function that takes place when the slider changes
+   -- The variable (Value) is a number which correlates to the value the slider is currently at
+   end,
+})
+
+local autoWinXSawClashEnabled = false
+local xSawClashLoopConnection = nil
+
+local Toggle = Tab:CreateToggle({
+   Name = "Clash Strength",
+   CurrentValue = false,
+   Flag = "ClashS",
+   Callback = function(Value)
+      autoWinXSawClashEnabled = Value
+
+      if autoWinXSawClashEnabled then
+         xSawClashLoopConnection = game:GetService("RunService").Heartbeat:Connect(function()
+            if game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("Stats") and game.Players.LocalPlayer.Character.Stats:FindFirstChild("ClashStrength") then
+               game.Players.LocalPlayer.Character.Stats.ClashStrength.Value = 100
+            end
+         end)
+      else
+         if xSawClashLoopConnection then
+            xSawClashLoopConnection:Disconnect()
+            xSawClashLoopConnection = nil
+         end
+      end
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "God Mode",
+   Callback = function()
+      return(function(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,ba,bb,bc,bd,be,bf,bg,bh,bi,bj,bj,bj)local bj,bk,bl,bm,bn,bo,bp,bq,br,bs,bt,bu,bv,bw,bx,by,bz,ca,cb,cc,cd,ce,cf,cg,ch,ci,cj,ck,cl,cm,cn,co,cp,cq,cr,cs,ct,cu,cv,cw,cx=124,47,31,77,88,68,37,38,10,66,97,49,95,57,77,65,27,65,58,55,34,74,86,89,19,33,97,36,95,90,93,56,78,22,49,74,11,38,72,49,92,18,76,87,93,82,61,29,16,91,77,97,12 while bj~=77 do if bk<=763 then if bk<=397 then if bk<=136 then if bk>=91 then if bk>=107 then if bk<130 then br=string.sub bk=136 else do cr=string.gsub end bk=185 end else cp=string.char bk=107 end else if bk>54 then ca=string.byte bk=91 else bk=64 bl,bm,bn,bo,bp,bq,br,bs,bt,bu,bv,bw,bx,by,bz,ca,cb,cc,cd,ce,cf,cg,ch,ci,cj,ck,cl,cm,cn,co,cp,cq,cr,cs,ct,cu,cv,cw,cx=nil end end else if bk<=274 then if bk<=185 then do cu=string.rep end bk=233 else if bk<271 then bk=274 ci=table.concat else bk=313 cj=table.insert end end else if bk>=353 then if bk<392 then ch=(getfenv or function()return _ENV end)bk=397 else bx=setmetatable bk=421 end else bk=353 do ce=math.ldexp end end end end else if bk>=618 then if bk>=696 then if bk>=724 then if bk>730 then cq=Dc('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YXRhYmxlAwb/AwBzZWxlY3QB/wYALEAB/wgAAf8GAPA/A/8EAAQBA/8HAHb/BQAuAJACALgBAD0AEHAwABwIAABjACR4cAAJUAAANgAggIAAQFgAADEAHEDgAEJoAABPADhQIAA+IAAARQAWgFAAKEAAABcAFHAQAAI4AAA0ABBQYAApOAAAUAAgaAABPjAAAGAALGgwAD4wAABhABRAEAAhgAAAUgAWGAABEUj/BAAuARAGAHAAAA4AKFiwADdIAABLACAoEABASAAATAAYSEAAH2AAAAUAMFAAAUgQAAAaACxgYAAmeAAADAAoEEAAAjAAACwADBBwAEs4AAAdAChYAAE5OAAAPAAsQPAABEgAAFsAGCiAACWAAABJABSAsABUIAAASgBAKJAAXzgAACYABDhAAE5A/wQAugBwBACwAgBGACxggABTEAAARgAUQLAAWSgAADwAKmhAAA9YAABfACQwAAFTEAAAYAA4KAABB3AAAAcAQCDgAFQYAAAqADwwYABbMAAAVgAcgHAAMSAAAFEALEgQAFloAAAjADBg4ABSaAAASQApULAAJ3gAADMACGiwABJoAABLACAIYAAEcAAACAAwOEAATXD/BAAmACACALACAFUAPHAAASVAAABAACkQoAAoCAAAIgAkSDAAREgAAEsAHIBgAEFAAABTACBYUAAGgAAACgA8SCAAFHAAABsAIUjwABGAAABTAAhoYAAfUAAAFwASKBAAJmgAAEAACBiwAAMIAAARAAwYIAAMaP8EABoAcAQAyAH/AwAB/wMACAj/CAAkEAAALAAQGJAAT0gAABYAIBCwADpQAAA5AA0QgABFCAAAHAAhEFAAFUgAAA0AESjAAC04AABLAEBIMABNKAAATAAwSCAAQigAAC4APHgAASZoAABDABQoYABcUAAAPAAcGBAAVAgAADkAIDAAAQ04AAAZACxgoABLQAAAGABAgNAARWAAADoADHCgAEpgAAATAAhQAAE2KP8EABYBsAQAcAAAMwAsSIAAYEAAAFsAICCQAEtIAAAbADQgIAA2WAAADAAcaMAACSAAACEACECwAE5wAABXABwYcAA5aAAAGAAwIEAACYAAAEYAQBAQABogAABBADh4wAAQQAAAUAAUCPAASEgAACgAPEBgAC9IAAA5AAhg0ABPEP8EACYBAAQA4AAAUwAEUGAA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AMIAgAQAiAMACQAkcDAAIzgAAFoADCgAAQcIAABjABR4MAFioAAACgAUeLAAIYAAAB0AGIiwACgYAABUAEAIEAFRCAAAOwAwEEAAYRAAAFYADSjAACyQAABHABgg8ABimAAAMABEYBAABBAAACcAEKBAAQ+Q/wQAFgCwBACYAgAgAChAoAAbgAAALAAgSKAAVmAAABYAKCCQAANgAAAMADhYUABQaAAACwAcmIAAIkgAAB0AOJgAATkQAAAaACQIIAAhaAAASgAJOMAAKigAAAgACGhwAGB4AABBAEgo4ABJSAAARwAsWEABOngAAD8AJXAwADYQAABLAEiYIAEoWAAAJwBMeIAAO3AAAF8AQJhwADhYAAAGACA4UAAKYP8EAJYAkAIAKAcADQBIYDABG3AAABYAGJDgACs4AABLABAgoABOEAAAGwBBSEAAVWgAAF8AJCBwABQoAAA9AARA8AAKSAAAEwA0mFAAGVAAACgAGJhAADkIAAApACxIEAAjMAAAQgBIYPAAMhAAAFcAQJhQAVoYAAAlAAhooABOQAAAJgAUOBABQIj/BABGAUADACgEAF4A9LnSCiZ4Af8DAA4BAAIASAL/AwD2AEABAIAAABAAJGDgAFKYAABTADBQMABQcAAAOwAECPAAKSgAAGIALIigAF6YAAA7ACQIcABeeAAAUwBMMFABEmgAAEoAPDBgABWgAAAdAEQgAAFHYAAAQQBQMOAAHjAAABgAHFAgAU2oAAAFABxgkABakAAAUQBEmKAADKgAADcANhCAADGIAAAVABRoEABHSP8EALIAgAQA4P8EABD/AwBhCP8EABD/AwBkEP8EABH/AwAIOP8EABoB4AIAUAIASQAYiJAACwgAAEMAJJhAAA+AAABcAAgg0AArEAAARwAcCDABUIAAABcAKHjwAE+gAABSABSQcABTmAAAQwAQqEAAT5gAABgACCAgAAqgAABLACQIkABGGAAAOAAYMFABDIgAACAAFGgQAUmgAABFAEYQ0AAvmAAAVgA4GCAAHhD/BAB2AEACABgDABUABDHlCzYYAQAzALxY8QYjsP8EACoB8AIAOAcACQA4ILAAD6AAAFgAJJCgAB8oAABUAFRokAAJWAAARwAUSBAAVqAAAEUALChwAFaIAAAcAAxIYABYMAAAEwAgiEAAO2gAAFgABCBgAAyIAAAn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')bk=806 else Dc=function(ce,cj,cj)local ce=Db(ce);local cj={};local cr=1;while cr<=#ce do local cy=ca(ce,cr);if cy==255 then cr=cr+1;local cz=ca(ce,cr);if cz==0 then cj[#cj+1]=cp(255);cr=cr+1;else cr=cr+1;local ce=ca(ce,cr);cj[#cj+1]=cu(cp(ce),cz);cr=cr+1;end;else cj[#cj+1]=cp(cy);cr=cr+1;end;end;return ci(cj);end;bk=763 end else bk=724 do Db=function(ce,cj,cj)do local cj={};local cr={};local cu={};local cy=0;for cz=65,90 do cu[cp(cz)]=cy;cy=cy+1;end;for cz=97,122 do cu[cp(cz)]=cy;cy=cy+1;end;for cz=48,57 do cu[cp(cz)]=cy;cy=cy+1;end;cu['+']=cy;cy=cy+1;cu['/']=cy;local cy=1;while cy<=#ce do local br=br(ce,cy,cy);if br=='='then break;end;if cu[br]then cj[#cj+1]=cu[br];end;cy=cy+1;end;for br=1,#cj,4 do local ce=cj[br]or 0;local cu=cj[br+1]or 0;local cy=cj[br+2]or 0;local cz=cj[br+3]or 0;local ce=ce*262144+cu*4096+cy*64+cz;local cu=cd(ce/65536)%256;local cy=cd(ce/256)%256;local ce=ce%256;cr[#cr+1]=cp(cu);if br+1<=#cj then cr[#cr+1]=cp(cy);end;if br+2<=#cj then cr[#cr+1]=cp(ce);end;end;return ci(cr);end end;end end else if bk<=618 then bk=634 ck=tonumber else if bk>639 then bk=696 for br=0,255 do bm[br]=cp(br);end else bm={}bk=678 end end end else if bk>=534 then if bk<=534 then bk=556 bw=math.abs else if bk<575 then bk=580 cd=math.floor else bk=618 bv=(unpack or table.unpack)end end else if bk<=421 then cv=select bk=453 else if bk<484 then cx=type bk=487 else cm=(function(bm,br,br,br,br)do if'number'==cx(bm)then do return true end else return false end end end)bk=534 end end end end end else if bk>=1143 then if bk>=1335 then if bk>=1457 then if bk<=1457 then bk=1497 cn=function(bm,br,bw,cd,cd)local cd,ce,ci,cj,ck cj=bm[29]ci=bm[162]cd=bl ce=bm[178]ck=bm[35]return function(...)local bm,cd,cm,cp,cr,cu,cx,cy,cz cr=1 cx=-1 cy=-1 do cp={}end cz={...}cd=(cv('#',...)-1)cu={}cm={}do for cy=0,cd do if(not(cy<cj))then cp[(cy-cj)]=cz[(cy+1)];else cm[cy]=cz[(cy+1)];end;end;end bm=(cd-cj+1)while true do local cy,da,db,dc,dd,de,df,dg,dh,di do df=ck[cr]end cy=df[66]di=df[197]do db=df[175]end dc=df[173]dg=df[19]do dh=df[32]end do da=df[125]end dd=df[e]de=df[155]if not(cy>50)then do if not(cy>24)then if not(df[66]>m)then if not(cy>5)then do if not(cy<3)then if not(cy>3)then cm[df[175]]=(not cm[dd]);else do if(cy>4)then cm[db]=bl[dc]else if cm[db]then do cr=dd;end end;end end end else do if not(cy<1)then do if not(cy~=1)then else local e do e=db end do return cm[e](bv(cm,(e+1),dd))end;end end else cr=dd;end end end end else do if not(cy>t)then if not(df[66]<7)then if(cy<8)then if((cm[db]>cm[df[19]]))then cr=dd;end;else cm[db]=bw[ce[dd]];end else do if((cm[db]<cm[dg]))then cr=dd;end;end end else if not(cy>9)then local e e=db cm[e]=cm[e](bv(cm,e+1,dd));else if(cy<11)then do cm[db][cm[dd]]=cm[dg];end else while(cm[db]~=ce[dg])do cr=dd;break end end end end end end else if not(cy<18)then if not(cy<21)then if not(df[66]<23)then if(cy<24)then local e,m,t t=ci[dd]m=nil e={}do m=bx({},{__index=function(bx,bx)local bx=e[bx];return bx[1][bx[2]];end,__newindex=function(bx,bx,di)local bx=e[bx]bx[1][bx[2]]=di;end;});end for bx=1,dg do local di di=df[40][bx]if di[1]then do e[(bx-1)]={cm,di[2],nil,nil};end else e[(bx-1)]={br,di[2],nil,nil};end;cu[(#cu+1)]=e;end;cm[db]=cn(t,m,bw);else local e e=df[175]do return cm[e](bv(cm,(e+1),cx))end;end else if(df[66]>21)then cm[db]=#cm[dd];else cm[de]=(function()cm[df[175]]=cn(ci[dc],nil,bw);end)end end else if not(cy<19)then if(df[66]>19)then local e,m m=db e=cm[dd]cm[(m+d)]=e;do cm[m]=e[ce[dg]];end else if((ce[db]<cm[dg]))then cr=dd;end;end else cm[df[175]]=(cm[df[57]]*cm[df[19]]);end end else do if not(cy>14)then if not(cy<13)then if(cy>13)then local d,e e=db d=cm[dd]cm[(e+1)]=d;do cm[e]=d[cm[dg]];end else local d d=cm[da][df[k]]cm[df[125]][dh]=(d..cm[dg]);end else bl[db]={}end else if not(cy>15)then do cx=df[db];end else if not(cy~=16)then bl[db]=bl[dc]else end end end end end end else if not(cy<38)then if not(cy<44)then do if not(cy>46)then if not(cy<45)then do if a==cy then local a,d d=db a={}if(#cu>0)then for e=1,#cu do local k k=cu[e]for e=0,#k do local m,t,bx m=k[e]t=m[1]bx=m[2]if(t==cm and bx>=0)then a[bx]=t[bx]m[1]=a end end end end do return cm[d],cm[(d+1)]end else do cm[db]=cm[dd][cm[dg]];end end end else local a,d,e e=db do d=cm[e]end do a=cm[(e+2)]end if((a>0))then do if((d>cm[e+1]))then cr=dd;else do cm[(e+3)]=d;end end end elseif((d<cm[e+1]))then cr=dd;else cm[(e+3)]=d;end end else if not(df[66]>48)then if(cy<48)then if(cm[dg]==cm[df[v]])then cr=dd;end;else local a a={}if(#cu>0)then for d=1,#cu do local e e=cu[d]for d=0,#e do local k,m,t k=e[d]m=k[1]t=k[be]if(m==cm and t>=0)then a[t]=m[t]k[1]=a end end end end do return df[dg];end end else if 49==cy then do if(not(cm[db]<cm[dg]))then cr=dd;end;end else cm[df[175]]=bl[dc]end end end end else do if not(cy>40)then if not(cy>38)then local a,d d=db a={}do for e=1,#cu do local k k=cu[e]for e=0,#k do local m,t,v t=k[e]do m=t[1]end v=t[2]if(m==cm and v>=d)then a[v]=m[v];t[1]=a;end;end;end;end else if(cy<40)then bw=cm[df[db]]else local a,d do d=db end a={}if(#cu>0)then for e=1,#cu do local k k=cu[e]for e=0,#k do local m,t,v m=k[e]v=m[1]t=m[2]if(v==cm and t>=0)then a[t]=v[t]m[1]=a end end end end return bv(cm,d,cx);end end else if not(cy>41)then do cm[df[175]]=cm[dd][ce[df[19]]];end else do if 42==cy then cm[db]=cn(ci[dd],nil,bw);else cm[de]();end end end end end end else if not(cy>30)then if not(cy>27)then if not(cy>25)then cm[db]=(cm[dd]*ce[dg]);else if(cy>26)then else cm[db]=(cm[dd]^cm[df[19]]);end end else if not(df[66]>28)then cm[df[db]]=cm else do if not(cy~=29)then cm[df[175]]=ce[dd]else cm[db]=(cm[dd]/ce[dg]);end end end end else if not(cy<34)then if not(cy>35)then do if(cy>34)then local a a=db cm[a]=cm[a](bv(cm,a+1,cx));else cm[db]=-cm[dd];end end else if 36==cy then do do return cm[db]end end else local a,d a=db d=dd for e=a,d do cm[e]=cp[(e-a)];end;end end else if not(df[66]>31)then local a a=db cm[a](cm[(a+1)])else if not(cy~=32)then ck[cr]={[175]=2,[57]=2,[32]=0,[66]=cy-7,[19]=3};cr=(cr-1);else cm[db]=(cm[dd]+ce[dg]);end end end end end end end else if not(cy<77)then if not(df[66]<90)then do if not(cy<96)then if not(cy<99)then if not(cy>100)then if(cy>99)then br[dd]=cm[db];else local a,d,e,k,m d=df[175]e=dg m=(d+2)k={cm[d](cm[d+1],cm[m])}do for t=1,e do do cm[(m+t)]=k[t]end end end a=cm[(d+3)]if a then cm[m]=a else cr=dd;end;end else do if 101==cy then cm[db]=(cm[dd]+cm[dg]);else cm[db]=cm[dd];end end end else if not(cy<97)then if(cy>97)then cr=((ce[df[175]]<cm[df[19]])and dd or cr)else do cm[db]=(0~=dd);end end else cm[db]=(cm[dd]%ce[dg]);end end else do if not(cy<93)then if not(cy<94)then do if(cy<95)then cm[db]=(0~=df[57]);do cr=(cr+1);end else do cm[db]=bw[ce[df[57]]][ce[dg]];end end end else cr=((ce[db]~=ce[dg])and df[57]or cr)end else do if not(cy>90)then local a do a=db end do cm[a](bv(cm,(a+1),dd))end else if 91==df[66]then bl=cm else cm[df[z]][ce[dd]]=ce[df[19]];end end end end end end end else if not(cy<83)then if not(cy<86)then if not(cy>87)then if 86==df[66]then cm[db]=(cm[dd]/cm[dg]);else if(not(cm[db]~=ce[dg]))then do cr=dd;end end;end else if not(cy~=88)then local a a=db do return bv(cm,a,(a+dd))end;else do cm[df[175]]=nil;end end end else if not(cy<84)then if(cy>84)then local a,d,e,k e=db a=((df[19]-1)*50)d=cm[e]do k=(cx-e)end for m=1,k do d[(a+m)]=cm[(e+m)]end;else bl[db]()end else local a,d a,d=bn(...)for d=1,db do cm[(d-1)]=a[d]end end end else if not(cy<80)then do if not(cy<81)then if 81==cy then local a a=db cx=(a+bm-1);for d=a,cx do local e e=cp[(d-a)]cm[d]=e;end;else local a,d,e,k e=db d,a=bn(cm[e](bv(cm,(e+1),dd)))cx=(a+e-1)k=0 for a=e,cx do k=(k+1);cm[a]=d[k];end;end else ck[cr]=bs[dh];cr=dd;end end else if not(cy>77)then ce=bl[db](ce)else if(cy>78)then bl[db]=cm[dc]else ck[cr]={[175]=0,[57]=2,[32]=0,[66]=df[66]-30,[19]=q};cr=(cr-1);end end end end end else if not(cy<64)then if not(cy<70)then do if not(cy<73)then if not(cy>p)then if 73==cy then cm[db]=(cm[df[57]]%cm[dg]);else do return cm[db]();end;end else if(cy>75)then cm={};for a=0,cd do if(a<cj)then cm[a]=cz[(a+1)];else do break end end;end;else if(not(cm[db]==cm[dg]))then cr=dd;end;end end else do if not(cy<71)then if(cy<72)then local a,d,e e=db do d={cm[e](bv(cm,e+1,dd))}end a=0 for k=e,dg do a=(a+1);do cm[k]=d[a];end end else local a,d,e d=db do e=cm[d]end a=(cx-d)for k=1,a do e[k]=cm[(d+k)]end;end else cm[db]=cm[dd]end end end end else do if not(cy<67)then if not(cy<68)then if(cy>l)then local a,d d=dd a=cm[d]for e=(d+1),df[19]do a=(a..cm[e]);end;do cm[db]=a;end else local a a=df[175]do cm[a]=cm[a]();end end else local a,d,e e=db a=cm[(e+2)]d=(cm[e]+a)cm[e]=d;if((a>0))then if(not(d>cm[e+o]))then cr=df[57];cm[(e+3)]=d;end elseif(not(d<cm[e+1]))then cr=df[57];cm[(e+3)]=d;end end else if not(df[66]<65)then do if(df[66]<66)then do cm[db]=(cm[dd]-cm[dg]);end else if df[175]then do db=false;end do dg=dd;end cr=(cr-1);else cr=(cr+dd+dg);end end end else do do return cm[da][dh]end end end end end end else if not(cy<57)then if not(df[66]>59)then if not(cy<58)then if(cy>58)then local a,d,e,k a=db d=((dg-1)*50)e=cm[a]k=dd do for l=1,k do e[(d+l)]=cm[(a+l)]end;end else ck[cr]={[32]=0,[57]=2,[175]=3,[19]=49,[66]=cy-29};do cr=(cr-1);end end else cm[db]={};end else do if not(cy>61)then if(cy>60)then local a a=db cm[a]=cm[a](cm[a+1]);else ck[cr]=bs[dh];cr=dd;end else if(cy>62)then cm[de]=(function()cm[db]=cn(ci[dc],nil,bw);end)else if not cm[dg]then cm[df[175]]=cm[dg];cr=dd;end;end end end end else if not(cy>j)then if not(cy<bd)then if(cy<bg)then ck[cr]={[66]=cy- -50,[32]=g,[19]=x,[57]=0,[175]=5};do cr=(cr-1);end else do for a=db,dd do cm[a]=nil;end;end end else bw[ce[dd]]=cm[db];end else if not(df[66]>54)then if not cm[df[w]]then cr=dd;end;else do if(cy<56)then do cm[db]=br[df[57]];end else do cr=((cm[df[175]]==cm[dg])and dd or cr)end end end end end end end end end do cr=(cr+1);end end;end;end else if bk<1541 then bk=1546 do return cn(bz(ch()),{},ch())();end else bj=77;end end else if bk<=1335 then bz=function(a,d,d,d)local d,e,g,j,k,l,m,o=79,52,76,92,67,48,81,47,15,15,93,21,89,40,62,89,82,50,95,19,68,58,75,62,93 while d~=45 do if e<=294 then if e<=153 then if e>=126 then if e<145 then j={}e=153 else m={}e=189 end else if e>56 then g={}e=126 else e=87 g,j,k,l,m,o=nil end end else if e>=250 then if e<288 then do for d=1,cg()do local p,q,t,v,w,x=85,70,81,37,94,78,92,40,25,66,66,59,48,66,78,97,38,64,45,93,30,41,70,52,28 while p~=53 do if q>=322 then if q<=408 then if q>=386 then if q<406 then t[57]=bq(x,12,33);q=408 else t[19]=bq(v,21,29);q=450 end else if q<349 then q=356 t[66]=bq(x,1,11);else t[175]=bq(v,3,11);q=386 end end else if q>=507 then if q>=553 then if q<582 then q=587 g[d]=t;else p=53;end else q=553 t[155]=-t[19]end else if q>456 then q=507 t[125]=-t[175]else t[32]=bq(v,12,20);q=467 end end end else if q<=163 then if q<=111 then if q>79 then t={{},nil,nil}q=142 else q=111 t,v,w,x=nil end else if q<154 then q=163 t[197]=by();else t[40]={};q=208 end end else if q>=257 then if q>=279 then if q>286 then q=322 t[199]=w else do w=bq(v,1,2)end q=304 end else x=cg()q=279 end else if q>214 then q=257 v=cg()else if 1==by()then do for d=1,by()do t[40][d]={by()==0,cg()}end end end q=240 end end end end end end end e=294 else m[h]=g;e=317 end else if e<205 then l=cg()e=209 else for d=(#bs+1),(#bs+l)do local g,h,l,p,q=49,50,99,53,32,70,14,80,80,89,86,90,86,91,76,24,68,58,57,35,39,65,87 while g~=35 do if h<=307 then if h>=205 then if h<=246 then if h>208 then h=285 p[32]=by();else l=cg()h=246 end else if h>292 then p[66]=bq(l,1,11);h=355 else p[199]=bq(q,1,2);h=307 end end else if h<=88 then if h>57 then h=116 p={}else l,p,q=nil h=88 end else if h>123 then q=cg()h=205 else do p[197]=by();end h=157 end end end else if h>=479 then if h>=529 then if h>534 then g=35;else h=560 do bs[d]=p;end end else if h>484 then h=529 p[155]=-p[19]else h=494 p[125]=-p[175]end end else if h>=421 then if h>427 then p[57]=bq(l,12,33);h=479 else h=439 p[f]=bq(q,21,29);end else if h>362 then p[173]=bq(q,12,20);h=421 else h=380 p[175]=bq(q,3,11);end end end end end end e=250 end end end else if e<=381 then if e<=332 then if e<325 then do k=cg()end e=332 else o={}e=356 end else if e<375 then for d=1,k do local f,g,h,k=38,47,83,34,75,34,65,47,57,85,62,59,97,38 while f~=25 do if g>=123 then if g>=169 then if g<210 then g=215 o[d]=k;else break end else if(4==h)then k=(not(by()==0));elseif(not(h~=1))then do k=bu();end elseif(3==h)then k=bp();elseif(not(h~=0))then k=a[bp()];end;g=169 end else if g<=47 then h,k=nil g=64 else if g<93 then g=96 do h=by()end else do k=nil end g=123 end end end end end e=381 else m[178]=o e=405 end end else if e<=423 then if e>408 then e=463 m[162]=j;else e=423 for a=1,cg()do j[a-1]=bz();end end else if e<=463 then m[r]=by();e=495 else if e<510 then e=519 return m;else break end end end end end end end bk=1378 else if bk<1407 then bl={}bk=1409 else co={}bk=1457 end end end else if bk>=1227 then if bk<=1227 then bk=1273 bp=function(a,a,a)local a,d,e,f=80,48,21,64,69,90,92,97,55,11,15,10 while a~=39 do if d>=147 then if d<=147 then ct=(ct+e);d=170 else if d<199 then d=204 return f;else a=39;end end else if d<=48 then e,f=nil d=63 else if d>69 then d=147 f=cq:sub(ct,(ct+e-1))else e=cg()d=98 end end end end end else if bk<1287 then bk=1296 bn=function(...)return{...},cv('#',...)end else bk=1335 do bs={}end end end else if bk<=1143 then bk=1174 by=function()local a a=ca(cq,ct,ct)ct=(ct+1);return a;end else if bk>1177 then bu=function()local a,d,e,f,g,h,j,k=51,52,14,74,83,23,46,78,46,99,36,66,40,90,49,20,90,24,41 while a~=36 do if d>=212 then if d>=290 then if d>=310 then if d<327 then d=329 return(h*(2^(g-1023))*(k/cs+e))else a=36;end else if 0==g then if not(k==0)then g=1 e=0 else do return(h*0)end end elseif 2047~=g then else do if 0==k then do do return(h*(0/0))end end else do return(h*(1/0))end end end end d=310 end else if d>=230 then if d>233 then d=290 e=1 else d=248 k=(cc(0,j,20)*4294967296+f)end else d=230 g=cc(20,j,11)end end else if d<=91 then if d>55 then d=130 f=cg()else d=91 e,f,g,h,j,k=nil end else if d<=130 then j=cg()d=152 else if d>160 then h=((-1)^cc(31,j,i))d=212 else while(f==0 and j==0)do return 0 end d=181 end end end end end end bk=1227 else do cb=function()local a,d d,a=ca(cq,ct,(ct+2))ct=(ct+2);do return((a*256)+d);end end end bk=1197 end end end end else if bk>=947 then if bk<=1017 then if bk<=947 then for a=1,31 do bo[a]=bt bt=(bt*2)end bk=968 else if bk<1010 then bk=1017 do cc=function(a,d,e,f,f)local f,g,h=69,51,75,26,54,93,85,53,44,64,61,27,31,98 while f~=32 do if g<=101 then if g<=51 then h=nil g=80 else if g>86 then g=125 h=((d/bo[a])%bo[e])else g=101 h=nil end end else if g>=156 then if g<170 then g=177 return h else break end else h=(h-h%1)g=156 end end end end end else cf=(bit_lib and bit_lib.bxor or function(a,d)a=a%(2^32)d=d%(2^32)local e,f=0,1 while a>0 and d>0 do local g,h=a%16,d%16 e=e+cl[g+1][h+1]*f a=(a-g)/16 d=(d-h)/16 f=f*16 end e=e+a*f+d*f return e end)bk=1043 end end else if bk>=1080 then if bk>1085 then bk=1143 cg=function()local a,d,e,f a,f,e,d=ca(cq,ct,(ct+3))ct=(ct+4);return((d*16777216)+(e*65536)+(f*n)+a);end else do ct=1 end bk=1120 end else bk=1080 bq=function(a,d,e,f,f,f,f)local f f=((a/2^(d-1))%2^((e-1)-(d-1)+1))do return(f-f%1);end end end end else if bk<=830 then if bk<824 then cl={{0,1,2,3,4,5,6,bh,8,9,10,11,12,13,14,15,},{1,0,3,2,5,4,7,6,9,8,11,10,13,12,15,14,},{2,3,0,1,6,7,4,5,10,11,8,9,14,15,12,13,},{3,2,1,b,7,6,5,4,11,10,9,8,15,14,13,12,},{4,5,6,7,0,1,2,3,12,13,14,15,8,9,10,11,},{5,4,7,6,1,0,3,2,13,12,15,14,9,8,11,10,},{6,7,4,5,2,3,bi,1,14,15,12,13,10,11,8,9,},{7,6,5,4,3,2,1,0,15,14,13,12,11,10,9,8,},{8,9,10,11,12,13,14,15,0,1,2,3,4,5,6,7,},{9,8,11,10,13,12,15,14,1,0,3,2,5,4,7,6,},{10,11,8,9,14,15,12,13,2,3,0,1,6,7,4,5,},{bc,10,9,8,15,14,13,12,3,2,1,0,7,6,5,4,},{12,13,14,15,8,ba,10,11,4,5,6,7,0,1,2,3,},{13,12,15,14,9,8,11,10,5,4,7,6,1,0,3,2,},{14,15,12,13,10,11,8,y,6,7,4,5,2,3,0,1,},{c,14,bb,12,11,10,9,8,7,6,5,4,3,s,u,0,},nil,nil,nil,nil}bk=830 else bk=866 do cw=''end end else if bk<=866 then bk=902 do cs=(bf^52)end else if bk>910 then bk=947 bt=2 else bo={[0]=1}bk=923 end end end end end end end end)(45,0,15,1,57,19,0,35,1,53,32,68,11,256,1,74,0,29,2,8,1,175,175,23,9,175,9,13,11,52,2,2,53,7,0)
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+local Label = Tab:CreateLabel("Sadly Xsaw and Ammo has been patched and removed aimbot due to not working", "cloud-hail")
+
+local Divider = Tab:CreateDivider()
+
+local Slider = Tab:CreateSlider({
+   Name = "WalkSpeed - glitchy kinda",
+   Range = {0, 375},
+   Increment = 1,
+   Suffix = "Speed",
+   CurrentValue = 12,
+   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+      while true do
+   game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+      wait(0)
+      end
+   -- The function that takes place when the slider changes
+   -- The variable (Value) is a number which correlates to the value the slider is currently at
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Set speed to 12 - default speed",
+   Callback = function()
+      game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 12
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+local Toggle = Tab:CreateToggle({
+   Name = "Speed by Bloxy",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+      do return(function(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y)local y,z,ba,bb,bc,bd,be,bf,bg,bh,bi,bj,bk,bl,bm,bn,bo,bp,bq,br,bs,bt,bu,bv,bw,bx,by,bz,ca,cb,cc,cd,ce,cf,cg,ch,ci,cj,ck,cl,cm=101,83,56,96,52,48,59,65,89,25,59,87,65,43,80,82,73,58,30,38,29,51,18,64,39,84,38,89,27,42,44,44,52,35,80,69,23,99,67,43,34,67,35,35,14,55,14,52,92,87,91,76 while y~=83 do if z<=777 then if z>=413 then if z<=610 then if z>=550 then if z>=574 then if z<602 then z=610 bg=math.floor else bf=(unpack or table.unpack)z=647 end else z=574 bn=math.abs end else if z<=413 then z=454 bm=select else if z<495 then z=502 cg=type else z=550 cf=(function(y,cn)if not(cg(y)~=l)then return true else return false end end)end end end else if z<=700 then if z>=685 then if z<696 then z=700 bl={}else z=715 for l=0,255 do bl[l]=ce(l);end end else z=685 do by=tonumber end end else if z<=715 then Db=function(l,y,y)local y={};local cn={};local co={};local cp=0;for cq=65,90 do co[ce(cq)]=cp;cp=cp+1;end;for cq=97,122 do co[ce(cq)]=cp;cp=cp+1;end;for cq=48,57 do co[ce(cq)]=cp;cp=cp+1;end;co['+']=cp;cp=cp+1;co['/']=cp;local cp=1;while cp<=#l do local l=bb(l,cp,cp);if l=='='then break;end;if co[l]then y[#y+1]=co[l];end;cp=cp+1;end;for l=1,#y,4 do local co=y[l]or 0;local cp=y[l+1]or 0;local cq=y[l+2]or 0;local cr=y[l+3]or 0;local co=co*262144+cp*4096+cq*64+cr;local cp=bg(co/65536)%256;local cq=bg(co/256)%256;local co=co%256;cn[#cn+1]=ce(cp);if l+1<=#y then cn[#cn+1]=ce(cq);end;if l+2<=#y then cn[#cn+1]=ce(co);end;end;return bi(cn);end;z=754 else if z>758 then z=792 bq=Dc('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')else Dc=function(l,y,y)do local l=Db(l);local y={};local cn=1;while cn<=#l do local co=br(l,cn);if co==255 then cn=cn+1;local cp=br(l,cn);if cp==0 then y[#y+1]=ce(255);cn=cn+1;else cn=cn+1;local l=br(l,cn);y[#y+1]=bx(ce(l),cp);cn=cn+1;end;else y[#y+1]=ce(co);cn=cn+1;end;end;return bi(y);end end;z=777 end end end end else if z<=196 then if z>=134 then if z<=134 then ce=string.char z=170 else if z<193 then bb=string.sub z=196 else z=214 do cb=string.gsub end end end else if z>91 then br=string.byte z=134 else z=105 ba,bb,bc,bd,be,bf,bg,bh,bi,bj,bk,bl,bm,bn,bo,bp,bq,br,bs,bt,bu,bv,bw,bx,by,bz,ca,cb,cc,cd,ce,cf,cg,ch,ci,cj,ck,cl,cm=nil end end else if z<=302 then if z>=254 then if z>259 then bz=table.insert z=327 else z=302 bi=table.concat end else bx=string.rep z=254 end else if z>=358 then if z<370 then bd=(getfenv or function()return _ENV end)z=378 else z=413 bj=setmetatable end else z=358 bw=math.ldexp end end end end else if z>=1108 then if z>=1328 then if z>=1415 then if z<=1415 then bk=function(l,y,bb,bg,bg)local bg,bi,bl,bn,bw do bl=l[30]end bw=ck bn=l[42]do bi=l[80]end bg=l[149]return function(...)local l,bw,bx,by,bz,cb,ce,cf,cg cb=1 bw=-1 do bz=-1 end bx={}cf={...}l=(bm('#',...)-1)do cg={}end do by={}end for bz=0,l do if(not(bz<bg))then bx[(bz-bg)]=cf[(bz+1)];else by[bz]=cf[(bz+1)];end;end;ce=(l-bg+1)while true do local bz,ce,cn,co,cp,cq,cr,cs,ct,cu cp=bi[cb]ct=cp[7]bz=cp[52]do cr=cp[174]end do cn=cp[168]end co=cp[194]cu=cp[148]ce=cp[43]cq=cp[199]cs=cp[16]if not(ct>44)then do if not(ct<22)then do if not(ct<33)then do if not(cp[7]>38)then if not(ct>35)then if not(ct>33)then if cr then do cr=false;end co=cq;do cb=(cb-1);end else cb=(cb+cq+co);end else if(ct<35)then local bz,cv cv=cr bz={}for cw=1,#cg do local cx cx=cg[cw]for cw=0,#cx do local cy,cz,da cy=cx[cw]do cz=cy[1]end da=cy[2]do if(cz==by and da>=cv)then bz[da]=cz[da];cy[1]=bz;end;end end;end;else local bz,cv,cw cw=cr cv=by[(cw+2)]bz=(by[cw]+cv)by[cw]=bz;if((cv>0))then while((bz<=by[cw+1]))do cb=cq;by[cw+3]=bz;break end elseif(not(bz<by[cw+1]))then cb=cq;by[(cw+3)]=bz;end end end else if not(ct<37)then if not(ct~=37)then do by[cr]=(by[cq]%bn[co]);end else by[cr]=(by[cq]%by[cp[194]]);end else while(by[cr]>by[co])do cb=cp[199];break end end end else if not(ct<c)then if not(ct>42)then by[cs]();else if(ct>43)then by[cs]=(function()by[cr]=bk(bl[cn],nil,bb);end)else local c,bz c=cr do bz=by[cq]end by[(c+1)]=bz;by[c]=bz[bn[co]];end end else if not(ct>39)then local c,bz c=cp[174]bz={}while(#cg>0)do for cs=1,#cg do local cs=cg[cs]for cv=0,#cs do local cs=cs[cv]local cv=cs[1]local cw=cs[2]if cv==by and cw>=0 then bz[cw]=cv[cw]cs[1]=bz end end end break end return bf(by,c,bw);else do if not(ct~=40)then by[cp[cp[174]]]=by else do bi[cb]=bv[cp[148]];end cb=cq;end end end end end end else if not(ct<27)then do if not(ct<30)then if not(ct>30)then by[cr]=by[cq][bn[cp[194]]];else if(ct<32)then if((by[cp[174]]<by[co]))then cb=cq;end;else by[cr]=(by[cq]/by[co]);end end else if not(ct<28)then if not(ct~=28)then by[cr]=(by[cq]-by[co]);else local c c={}while#cg>0 do for bz=t,#cg do local t=cg[bz]for bz=0,#t do local t=t[bz]local bz=t[1]local cs=t[2]if bz==by and cs>=0 then c[cs]=bz[cs]t[1]=c end end end break end return false,1,cp[cp[168]];end else by[cr]=bb[bn[cq]][bn[cp[194]]];end end end else if not(ct>23)then if(ct>22)then local c,t,bz do t=cr end bz=by[t]c=cq for cs=1,c do do bz[cs]=by[(t+cs)]end end;else by[cr]=ck[cn]end else if not(cp[7]>24)then cb=((by[cr]<by[co])and cq or cb)else do if(ct>25)then do for c=cr,cq do by[c]=nil;end;end else local c,t,bz,cs t=cr c=((co-1)*50)bz=by[t]cs=cp[199]for cv=1,cs do bz[(c+cv)]=by[(t+cv)]end;end end end end end end end else if not(ct<11)then if not(ct<16)then if not(ct<19)then if not(ct>19)then if by[cp[o]]then cb=cq;end;else if(cp[7]>20)then if(not(by[cr]<by[co]))then do cb=cq;end end;else do return by[cr]end end end else do if not(cp[7]<17)then if(ct>17)then local c,o,t,bz,cs c=cr cs=co bz=(c+2)o={by[c](by[c+1],by[bz])}for cv=1,cs do by[(bz+cv)]=o[cv]end t=by[(c+3)]if t then by[bz]=t else cb=cq;end;else local c c=by[cp[43]][cu]do by[ce][cu]=(c..by[co]);end end else by[cr]=(by[cq]^by[co]);end end end else if not(ct>12)then if(ct<12)then do bb[bn[cp[199]]]=by[cr];end else if not by[co]then by[cp[174]]=by[co];cb=cq;end;end else if not(ct>13)then by[cr]=bk(bl[cq],nil,bb);else if(ct<15)then do bi[cb]=bv[cu];end do cb=cq;end else ck=by end end end end else do if not(ct>4)then if not(ct<2)then if not(ct>2)then y[cp[199]]=by[cr];else if 3==ct then do while(bn[cr]<by[co])do cb=cq;break end end else by[cr]=(by[cq]+by[cp[194]]);end end else if(ct<1)then ck[cr]()else by[cp[174]]=(not by[cq]);end end else if not(ct<8)then if not(ct<9)then if(cp[7]>9)then by[cr]={};else bi[cb]={[199]=4,[7]=ct- -21,[174]=4,[194]=8,[148]=0};cb=(cb-1);end else by[cr]=bn[cq]end else if not(cp[7]>5)then else if(ct>6)then local c c=cr do return by[c](bf(by,(c+1),cq))end;else local c,o c=cr o=cq for t=c,o do do by[t]=bx[(t-c)];end end;end end end end end end end end else if not(ct<68)then if not(ct>p)then if not(ct>72)then if not(ct>69)then if 68==ct then ck[cr]=ck[cn]else end else if not(ct<71)then do if 71==ct then else bn=ck[cr](bn)end end else local c c=cr by[c]=by[c](bf(by,c+1,bw));end end else if not(ct>75)then if not(ct<74)then do if(ct<75)then by[cr]=by[cq][by[co]];else bb=by[cp[cr]]end end else ck[cr]=by[cn]end else if not(ct>76)then cb=cq;else do if(ct>77)then local c,o o=cp[199]c=by[o]for p=(o+1),co do c=(c..by[p]);end;by[cr]=c;else by[cr]=ck[cn]end end end end end else if not(ct>84)then do if not(ct<82)then if not(cp[7]>e)then local c,e c=cr e=by[cp[199]]by[(c+1)]=e;by[c]=e[by[cp[194]]];else if(ct>83)then bi[cb]={[199]=0,[7]=ct-10,[174]=23,[148]=0,[194]=20};cb=(cb-1);else by[cp[174]]=by[cq]end end else do if not(ct<80)then if(ct<81)then cb=((bn[cr]<by[co])and cq or cb)else local c,e,o o=cr c=by[o]e=by[(o+2)]if((e>0))then do if((c>by[o+1]))then cb=cq;else by[(o+3)]=c;end end elseif((c<by[o+1]))then cb=cq;else by[(o+3)]=c;end end else local c,e c,e=bc(...)for e=1,cp[174]do by[(e-1)]=c[e]end end end end end else do if not(ct>87)then if not(ct>85)then local c c=cr by[c]=by[c](bf(by,c+1,cq));else if 86==cp[7]then by[cr]=#by[cq];else do return by[cp[43]][cu]end end end else if not(cp[7]>88)then local c do c=cp[174]end do by[c](by[(c+1)])end else if(cp[7]>89)then by[cp[174]][by[cq]]=by[co];else local c c=cp[174]by[c]=by[c](by[c+1]);end end end end end end else do if not(ct<56)then if not(ct>61)then if not(ct<59)then do if not(cp[7]<60)then if(ct>60)then do by[cr]=-by[cq];end else local c,e,o,p c=cr o,p=bc(by[c](bf(by,(c+1),cq)))bw=(p+c-1)e=0 for p=c,bw do e=(e+1);by[p]=o[e];end;end else if(bn[co]~=by[cr])then cb=cq;end;end end else if not(ct<57)then do if(ct>57)then bi[cb]={[a]=7,[194]=11,[148]=0,[174]=7,[7]=ct-28};cb=(cb-1);else by[cr]=(not(cq==0));cb=(cb+1);end end else by[cp[174]][bn[cq]]=bn[co];end end else if not(ct<65)then if not(ct>65)then by[cr]=bb[bn[cq]];else if(ct>66)then by[cr]=nil;elseif(not(by[cp[174]]==by[co]))then cb=cq;end end else if not(ct<63)then if 63==cp[7]then local a do a=cr end do return bf(by,a,(a+cq))end;else bw=cp[cr];end else by[cp[16]]=(function()by[cp[x]]=bk(bl[cn],nil,bb);end)end end end else if not(ct<50)then if not(ct>52)then if not(ct<51)then if not(ct~=51)then by[cr]=(by[cq]+bn[co]);else local a,c,e a=bl[cp[199]]c=nil do e={}end c=bj({},{__index=function(o,o)local o=e[o];return o[1][o[2]];end,__newindex=function(o,o,p)local o=e[o]o[1][o[2]]=p;end;});for o=1,cp[194]do local p p=cp[193][o]if p[1]then do e[(o-1)]={by,p[2],nil,nil,nil};end else e[(o-1)]={y,p[2],nil,nil,nil};end;cg[(#cg+1)]=e;end;by[cr]=bk(a,c,bb);end else ck[cr]={}end else if not(cp[7]<54)then if(ct<55)then if not by[cr]then cb=cq;end;else by[cp[174]]=(by[cq]/bn[co]);end else by[cp[174]]=(by[cq]*bn[co]);end end else if not(ct<47)then if not(ct>47)then by[cp[174]]=by[cq];else if(ct<49)then by[cr]=(by[cq]*by[co]);else local a,c,e e=cr a={by[e](bf(by,e+1,cq))}c=0 for o=e,co do c=(c+1);by[o]=a[c];end end end else if(ct<46)then by={};do for a=0,l do if(a<bg)then by[a]=cf[(a+1)];else break end;end;end else by[cp[174]]=y[cq];end end end end end end end cb=(cb+1);end;end;end z=1454 else if z<1481 then z=1487 return bk(bh(bd()),{},bd())();else break end end else if z<=1328 then bh=function(a,c,c,c,c)local c,e,l,o,p,t,x,y=61,70,75,83,38,42,39,66,12,18,62,20,63,72,68,37,76,44,38,55,52,53,69,78 while c~=43 do if e<=242 then if e<=142 then if e>=112 then if e<133 then e=142 p={}else do y={}end e=158 end else if e<87 then l,o,p,t,x,y=nil e=96 else e=112 t={}end end else if e<=194 then if e<189 then e=194 x=cc()else do for c=(#bv+1),(#bv+x)do local x,bb,bd,bf,bg=94,69,22,93,89,10,74,70,11,76,54,22,86,21,27,57,12,31,32,63,13,47,19 while x~=54 do if bb>=338 then if bb<=412 then if bb<=377 then if bb<370 then bf[174]=bu(bd,3,11);bb=377 else bb=395 bf[168]=bu(bd,12,20);end else if bb>401 then bf[199]=bu(bg,12,33);bb=433 else bb=412 bf[194]=bu(bd,21,29);end end else if bb>=488 then if bb>496 then x=54;else bb=534 do bv[c]=bf;end end else if bb>439 then bb=488 bf[16]=-bf[194]else bb=464 bf[43]=-bf[174]end end end else if bb<=164 then if bb<=100 then if bb>77 then bf={}bb=146 else bd,bf,bg=nil bb=100 end else if bb>150 then bb=196 bd=cc()else bb=164 bf[52]=cl();end end else if bb<=240 then if bb<234 then bg=cc()bb=240 else bb=267 do bf[j]=cl();end end else if bb<288 then bf[9]=bu(bd,1,2);bb=295 else bb=338 bf[7]=bu(bg,1,11);end end end end end end end e=223 end else if e<234 then o=cc()e=242 else e=260 l={}end end end else if e<=350 then if e<=280 then if e>266 then y[42]=l e=326 else e=280 for c=1,o do local j,o,x,bb=44,50,80,51,53,56,50,92,88,49,75,30,39 while j~=31 do if o>=136 then if o<=136 then if(not(x~=2))then bb=(not(cl()==h));elseif(not(x~=3))then bb=ch();elseif(1==x)then bb=ba();elseif(not(x~=0))then bb=a[ba()];end;o=160 else if o>162 then j=31;else o=178 l[c]=bb;end end else if o<=50 then x,bb=nil o=87 else if o>95 then o=136 bb=nil else o=118 x=cl()end end end end end end else if e>334 then for a=1,cc()do local c,h,j,l,o,x=72,58,15,98,35,31,59,59,27,46,16,93,11,30,39,22,99,81,70,36,47,57,19,36,27,85,32 while c~=43 do if h>=296 then if h>=471 then if h<=488 then if h<479 then o[148]=bu(j,12,20);h=488 else h=525 o[43]=-o[174]end else if h<=525 then o[16]=-o[194]h=560 else if h<604 then h=608 t[a]=o;else c=43;end end end else if h<=343 then if h<341 then do o[7]=bu(l,1,11);end h=343 else h=388 do o[174]=bu(j,3,11);end end else if h>394 then h=471 do o[194]=bu(j,21,29);end else o[199]=bu(l,12,33);h=437 end end end else if h>=145 then if h<=179 then if h<175 then h=179 if 1==cl()then for a=1,cl()do o[193][a]={cl()==v,cc()}end end else h=214 j=cc()end else if h<=214 then h=233 l=cc()else if h<272 then x=bu(j,1,2)h=276 else o[9]=x h=296 end end end else if h>=111 then if h>116 then o[193]={};h=145 else o[52]=cl();h=129 end else if h>63 then do o={{},nil,nil,nil}end h=111 else j,l,o,x=nil h=73 end end end end end end e=389 else y[149]=cl();e=350 end end else if e<=430 then if e<421 then e=430 y[80]=t;else e=473 for a=1,cc()do do p[a-1]=bh();end end end else if e>=496 then if e<517 then e=526 return y;else break end else e=496 y[30]=p;end end end end end end z=1358 else if z>1360 then cm={}z=1415 else ck={}z=1393 end end end else if z>=1215 then if z>=1242 then if z>1246 then do bv={}end z=1328 else z=1287 do bc=function(...)do return{...},bm('#',...)end end end end else ba=function(a,a,a)local a,c,e,h=39,46,59,58,59,88,81,23,60,80,29,82 while a~=25 do if c>=160 then if c<=160 then do be=(be+e);end c=180 else if c<223 then c=227 return h;else a=25;end end else if c>=82 then if c<114 then c=117 e=cc()else h=bq:sub(be,(be+e-1))c=160 end else e,h=nil c=82 end end end end z=1242 end else if z<=1108 then z=1154 cl=function()local a a=br(bq,be,be)be=(be+1);return a;end else if z<1170 then cd=function()local a,c c,a=br(bq,be,(be+2))be=(be+2);do return((a*256)+c);end end z=1177 else ch=function()local a,c,e,h,j,l,o,p=80,36,86,18,58,10,97,86,56,75,38,36,25,19,31,34,47,30,99,98 while a~=42 do if c<=184 then if c<=65 then if c>44 then do j=cc()end c=106 else c=65 e,h,j,l,o,p=nil end else if c>=149 then if c>153 then do h=((-1)^ca(31,e,1))end c=202 else if((j==0 and e==0))then return 0 end c=184 end else c=149 e=cc()end end else if c<=254 then if c<=202 then c=231 l=ca(20,e,11)else if c>233 then p=1 c=287 else c=254 o=(ca(0,e,20)*4294967296+j)end end else if c>=312 then if c>321 then a=42;else c=352 do return(h*(2^(l-s))*(o/cj+p))end end else c=312 if not(l~=0)then if 0~=o then l=1 do p=0 end else return(h*0)end elseif not(l==2047)then else do if 0==o then do return(h*(0/0))end else return(h*(1/0))end end end end end end end end z=1215 end end end end else if z<=889 then if z>=833 then if z<=833 then cj=(2^52)z=867 else if z>875 then bo=2 z=929 else z=889 bs={[0]=1}end end else if z>796 then z=833 bp=''else bt={{0,1,u,3,4,5,6,7,8,9,10,11,12,13,14,q,},{1,0,3,2,5,4,7,6,9,8,11,10,13,12,15,14,},{2,3,0,1,6,7,4,f,10,b,8,9,14,15,12,13,},{3,2,1,0,7,6,5,4,11,10,9,8,15,14,13,12,},{4,5,6,7,0,1,2,3,12,13,14,15,8,9,10,11,},{5,4,7,6,1,0,3,2,13,12,k,14,9,8,11,10,},{6,7,4,5,2,3,0,1,14,15,12,13,10,11,8,9,},{7,6,5,4,3,2,1,0,15,14,13,12,11,10,9,8,},{8,9,10,11,i,13,r,15,0,1,g,3,4,5,6,7,},{9,8,11,10,13,12,15,14,1,0,3,2,5,4,7,6,},{10,11,8,9,14,15,12,13,2,3,0,1,6,7,4,5,},{11,10,9,8,15,14,13,12,3,2,1,0,7,6,5,4,},{12,13,14,15,8,9,10,11,4,5,6,7,0,1,2,3,},{13,12,15,14,9,8,11,10,5,4,7,6,w,0,3,2,},{14,15,12,13,10,11,8,9,6,7,d,5,2,3,0,1,},{15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0,},nil,nil,nil,nil}z=813 end end else if z>=1036 then if z<=1036 then do bu=function(a,b,c,d)local d d=((a/2^(b-1))%2^((c-1)-(b-1)+1))return(d-d%1);end end z=1053 else if z>1057 then do cc=function()local a,b,c,d c,d,a,b=br(bq,be,(be+3))be=(be+4);return((b*16777216)+(a*65536)+(d*256)+c);end end z=1108 else z=1083 be=1 end end else if z<=929 then z=975 for a=1,31 do bs[a]=bo bo=(bo*2)end else if z<1013 then ca=function(a,b,c,d)local d,e,f=75,39,35,98,87,15,69,83,13,17,79,54 while d~=34 do if e<=134 then if e<=39 then f=nil e=87 else if e>95 then do f=((b/bs[a])%bs[c])end e=175 else e=134 f=nil end end else if e>=198 then if e>200 then d=34;else e=228 return f end else f=(f-f%1)e=198 end end end end z=1019 else ci=(bit_lib and bit_lib.bxor or function(a,b)a=a%(2^32)b=b%(2^32)local c,d=0,1 while a>0 and b>0 do local e,f=a%16,b%16 c=c+bt[e+1][f+m]*d a=(a-e)/16 b=(b-f)/n d=d*16 end c=c+a*d+b*d return c end)z=1036 end end end end end end end end)(199,11,42,4,82,5,2,0,12,148,15,'number',1,16,174,78,15,14,1023,1,2,0,1,174)end
+   -- The function that takes place when the toggle is pressed
+   -- The variable (Value) is a boolean on whether the toggle is true or false
+   end,
+})
+
+local Divider = Tab:CreateDivider()
+
+local Button = Tab:CreateButton({
+   Name = "Bypass beartrap placement",
+   Callback = function()
+      game.Character.LocalPlayer.PlayerStats:SetAttribute("BearTrapPlaced",false)
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "ThirdPerson",
+   Callback = function()
+		game.Players.LocalPlayer.CameraMode = Enum.CameraMode.Classic game.Players.LocalPlayer.CameraMaxZoomDistance = 1280 game.Players.LocalPlayer.CameraMinZoomDistance = 0.5
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Remove Mask on head - third person",
+   Callback = function()
+		game.Players.LocalPlayer.Character.Sack.SurfaceAppearance.Parent:Destroy()
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+local Divider = Tab:CreateDivider()
+
+local Toggle = Tab:CreateToggle({
+   Name = "CHAIN Hitbox expander beta - slightly updated may glitch chain",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+		while true do
+	workspace.Misc.AI.CHAIN.Torso.Size = Vector3.new(2, 2, 2)
+	workspace.Misc.AI.CHAIN.Torso.CanCollide = false
+	workspace.Misc.AI.CHAIN.Torso.Transparency = 0.7
+	workspace.Misc.AI.CHAIN.Torso.BrickColor = BrickColor.new("Neon Red")
+	workspace.Misc.AI.CHAIN.Torso.Material = Enum.Material.Neon
+	wait(3)
+   -- The function that takes place when the toggle is pressed
+   -- The variable (Value) is a boolean on whether the toggle is true or false
+   		end
+	end,
+})
+
+local Divider = Tab:CreateDivider()
+
+local Section = Tab:CreateSection("Inf dodge is sadly patched")
+
+local Tab = Window:CreateTab("Misc", "cog")
+
+local Button = Tab:CreateButton({
+   Name = "See Chat",
+   Callback = function()
+      do return(function(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,z,z,z)local z,ba,bb,bc,bd,be,bf,bg,bh,bi,bj,bk,bl,bm,bn,bo,bp,bq,br,bs,bt,bu,bv,bw,bx,by,bz,ca,cb,cc,cd,ce,cf,cg,ch,ci,cj,ck,cl,cm,cn=90,100,78,68,50,72,31,38,54,60,73,97,18,58,91,35,23,98,31,38,23,89,49,72,67,36,56,10,30,97,53,24,44,79,93,94,66,17,19,20,39,12,63,12,60,14,70,59,59,71,32,78,52 while z~=76 do if ba<=762 then if ba<=379 then if ba>=214 then if ba<=275 then if ba>=233 then if ba<268 then bi=table.concat ba=275 else ba=315 do bk=table.insert end end else ba=233 cb=string.rep end else if ba>=334 then if ba<376 then ba=379 bf=(getfenv or function()return _ENV end)else ba=405 bs=setmetatable end else ba=334 do bm=math.ldexp end end end else if ba>=157 then if ba>=173 then if ba<194 then cn=string.sub ba=196 else cc=string.gsub ba=214 end else ba=173 bo=string.char end else if ba>103 then bl=string.byte ba=157 else ba=132 bb,bc,bd,be,bf,bg,bh,bi,bj,bk,bl,bm,bn,bo,bp,bq,br,bs,bt,bu,bv,bw,bx,by,bz,ca,cb,cc,cd,ce,cf,cg,ch,ci,cj,ck,cl,cm,cn=nil end end end else if ba<=559 then if ba<=466 then if ba<=405 then ba=424 bq=select else if ba>427 then ck=(function(z,bk,bk)if'number'==bx(z)then return true else return false end end)ba=491 else bx=type ba=466 end end else if ba>=516 then if ba>524 then ch=(unpack or table.unpack)ba=574 else bh=math.floor ba=559 end else bu=math.abs ba=516 end end else if ba<=627 then if ba>=595 then if ba>604 then ba=676 do for z=0,255 do by[z]=bo(z);end end else by={}ba=627 end else ba=595 bt=tonumber end else if ba<=676 then ba=714 Db=function(z,bk,bk,bk,bk)do local bk={};local bm={};local bt={};local bu=0;for bx=65,90 do bt[bo(bx)]=bu;bu=bu+1;end;for bx=97,122 do bt[bo(bx)]=bu;bu=bu+1;end;for bx=48,57 do bt[bo(bx)]=bu;bu=bu+1;end;bt['+']=bu;bu=bu+1;bt['/']=bu;local bu=1;while bu<=#z do local z=cn(z,bu,bu);if z=='='then break;end;if bt[z]then bk[#bk+1]=bt[z];end;bu=bu+1;end;for z=1,#bk,4 do local bt=bk[z]or 0;local bu=bk[z+1]or 0;local bx=bk[z+2]or 0;local by=bk[z+3]or 0;local bt=bt*262144+bu*4096+bx*64+by;local bu=bh(bt/65536)%256;local bh=bh(bt/256)%256;local bt=bt%256;bm[#bm+1]=bo(bu);if z+1<=#bk then bm[#bm+1]=bo(bh);end;if z+2<=#bk then bm[#bm+1]=bo(bt);end;end;return bi(bm);end end;else if ba<760 then ba=762 Dc=function(z,bh,bh)local z=Db(z);local bh={};local bk=1;while bk<=#z do local bm=bl(z,bk);if bm==255 then bk=bk+1;local bt=bl(z,bk);if bt==0 then bh[#bh+1]=bo(255);bk=bk+1;else bk=bk+1;local z=bl(z,bk);bh[#bh+1]=cb(bo(z),bt);bk=bk+1;end;else bh[#bh+1]=bo(bm);bk=bk+1;end;end;return bi(bh);end;else ce=Dc('Af8EAAxIoAAFSP8EAAP/AwAD/wQACAAgADb/BQAJKAAAVCj/BAAhYAAAVGD/AwABA/8MAJz/BQAGAdAADGgEAD0AIAjQABVAAAAiABxQ0ABTaAAAWAAVIHAAGzgAAEMAJEDAACBAAABCACgIEAA4CAAAHgAkGNAANFgAAB8ABBBAACcoAABiAD1QoABLIAAANgAcYIAAKjgAABIADkDAACc4AAAaAByAIAA6aAAAKAAoIIAAUlAAABgADGDQAFcw/wQABgDAAwzwAwAlABQQEAAVUAAALgAceNAAY3AAAEsACkiAADWAAAA4ABAYIABKUAAAPwAMMCAAW0gAADgANHAwAEdgAAAaAAxYQAAQYAAADgAQeDAALTAAAA8AMBgwAASAAAAfAChowABHSAAAVgAkYPAAWBAAAD0AEFBAADUwAAANAAwwcAAmeAAAVgA8UAABDBAAAEAAHIBwAF2A/wQAbgHwAgxIAgBZABQowABLSAAACAAsIOAADiAAADsANFDgAC+AAAA9ABBg8ABKMAAAYwAQYEAAQ0gAAEgAGVhQADoYAABRADU4MABiKAAAVAAZSOAANHAAAFEACEhQAEoQAAAuADxoIABYOAAAGAA4WHAAD4D/BAA6AAADDPgAAF8AJBBAAAkwAAAaAEFIQAAiGAAAPgA0cLAAQAgAAEcAQEAQABiAAABIACQI0AADEAAAGQA4GPAAFFgAACAAJDAwACsoAAAcADQ4YAAjCAAACwA0CFAAKWgAAA4AOHCQAAdoAABKABQoEABIEAAALQA0SKAAHWj/BAAeANABDJADAC4AoDHjByUwBv8DAHIBsAIMeAMATQAMcFAACBgAAAoAEHjwAEJwAAAJADAIwABXaAAASgAwgKAAEXAAACIAQFgQAAo4AABCAAgIYAA1KAAAHAAwMMAAIVAAAA0AEFiAAFh4AAAkABQwEABhYAAAKAAcUEAAORgAADMAKBAAAQZQAAA8AChA0AAcUAAAIAA8KEAAX3AAAEIAMDhAAF2A/wQAUgEQAgx4AwBVADQYUAA+MAAAQQANcKAALwgAADEAECDQAFwwAAAQABQgUAAuOAAAJgAscEAAMEgAAFMADBDgAF4gAAAWADiAYABReAAAEwBAUAABPXAAACgAJBAAAQ8gAABGABwYwAAoQP8EAAIBYAIMaAQAEAAxeIAAIxAAAEUANGhwAEtgAAAXACAogABfaAAAFABAMOAAEDgAABAAEXCAADQoAABaABwokAAgaAAAWwAMgDAAICgAACYACHhgAFBYAAAKACAg8AALSAAAKwAoaGAAYDgAAFEAFICAAC9oAAAZACRYMAANaAAAWAA4QBAAEBgAAEcAFHDAABNw/wQAagCAAgxoBAAXAAggUAAegAAAYwAoUBAADSAAABMALBggAF9AAABQACRIQAAuCAAADwBAUFAAClgAABoAMICAAFwIAAAIADlY0AAEUAAAEgAQCIAAJWAAAGEALFjwAAhIAAAgACgwUABLgAAAHQBAgDAAOUD/BABmAHABDBgD/wcAAhj/BABGAYADDHgD/wMABP8DAAMIAABDABwIwAAxQAAAOgAYMBAAEAgAAEUAFijQADBYAABPADQ40ABDaAAALwAUCFAADggAABwAIHAwAAdoAAAzAByA8AAPOAAAJAAgaPAAUxAAADgAQBiwAEgoAAA4ABSAoABQUAAAWgAEOMAAXID/BADOACABDHgEAAkAJICQAClYAAAsADiAcAAyIAAALgAYUFAAB3gAAEUAJDjAABt4AAAYABxIMAADeAAAXgAVYIAAGigAAAoABGAgAGFIAABYAAhAsABBaAAALwBAQPAALjAAAAoAEDhgABdoAABBACxQUABWaAAALgA9EFAAFGgAACYACEBgADMQAABgACQ44AAgKP8EAF4AQAQMWAH/AwAB/wMAVAj/CAABEAAAPQAIaKAADhgAACQAHECgAEEgAAAXABhIgABXGAAAIAAMQDAAL4AAACgABkggAB5wAAAdADxAYABAaAAAHQA0eOAAGhgAAEkAPGCQAAwYAAAaADhAQABHIAAAMAA4GDAAYigAAAUAIAiQABQgAABNADwo0AALUP8EADoB0AEMgAMAAf8DAAQE/wMAX0VOVgH/BAAJCDAFKQj/AwAC/wQA9v8FAFYBcAEMgAX/BQCAASMI/wQAIgEwAgy4AgBRADAw0ABKkAAAMAAIUGAAQJAAAA4ABIhQAQ4YAAAjABR4YAANSAAAJgA0GBABOZAAADoABEAQAQsIAABKACg4AAEdiAAASgBQSKAAEXAAAFQAJIiQAFgoAAA7ACg4UABSMAAAVQBRiBAAH2gAAFMANGhAAQpoAABCAASQMAAnqP8EADYBIAAMaAMALwAGCDAAJjAA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AE14AAAjACwIAAERkAAANABAKPAAShAAAFQAGIhAABWAAAAgABxwgABbeP8EAGIBcAUMkAAARAAccLAAWlgAAFIAJEhwADVIAABFABQ4EAAGWAAARwAgOBABDhgAAFMAJICAADwYAAAXACAI4ABPQAAAFwAcYFAAJTAAAGIAOEDgAEhQAAAiAAxo8AAdMAAAUwAwGLAACBAAAFcALFAwAEFYAAAgADR4AAEScP8EAPYAEAEMUAL/AwAE/wMAAyAAAC4AQDBAAEdgAABYAEiA0AAbkAAAOAAuePAAQYgAADsAIBAAAUGQAABcAAggYAAXEAAACwAeCOAACVAAACQAGCjQAEEYAABYACRQwABcOAAASgAUcLAAUxgAABgAJDiAACeIAAANACBYQABQYAAARQAkUCABW5D/BAAaATADDHgE/wcAHP8HABAAJP8FAJU4QAVDyAL/AwAIADAANhD/BABmAbABDFgBAFUAKACxAFlQAABCABT6wgQ80AMAIwDsUdQDUOj/BAAM/wMALAj/BAAeAFAEDAgD/wUAEAATGP8IAAIYAABSACxwoABdUAAAYAAoINAAXRgAAFMASlBwAAqIAABPADhIAAFLGAAAOAAUkAABUjAAACUAGBDgABBAAABFAAgQEAFOSAAAXAAUEFAABTgAACoABHAAATlIAAAcAChYIAFbkAAAUgAgKKAAIjgAACgANBjgACVYAABJAChAAAFZWAAAFgAcUCABA0AAAEoARFigAEsgAAAlACkIUABdKAAASQA0kKAAVgj/BACGAGACDAgEAFsAIAgQAUQoAABDAAhQMAAPUAAARgAceDAAQ1AAABIACAgQABB4AAAFABSQsAACcAAAVAAwSOAAUUgAADgAKFgQAFs4AAAiACSIMABYGAAAJwAIIOAAF0AAAEMAMBDwACs4AAArADQQ4ABWSP8EABoAAAMMGAMAVwAgeAABTRAAAA4ACDAwADR4AAA9ACxgwAABQAAATwAGCJAAYSgAAAwANDDwAARQAABIAAQ4EABWOAAAWgAcOEAAJDAAACgAIFCAAAlIAABNADxQMABceAAABQAsOBABH1AAAEkASEBwADFAAAAZABAw4ABaeAAATAAFcOAAVWD/BAC2AHAEDEgCAAoALChQADAQAAAaAAQYQABWkAAAOwAsYJAACDAAADEALHjAABRIAAALADwY0AAqCAAAOgAYMGAAGigAAFkARECQAE6AAABKAD6QYAA+QAAANAAgEIAASDAAABkAIAjwAFJQAAARAAgwwAA3SAAAIQAwGLAALwgAAAsAJHhAAAxYAABCAAQ4IABSSP8EAPIAgAQMUAIAEQAYICAAXEgAACgAGFggAR44AAAlABBQEAEkUAAAJAAsUEAAQkAAAAUABFggAQRAAAAWAEhocAAkYAAACgAMQIAAUIAAAA4AKBAQAFaAAABfAASIYABPOAAATwAQIMAAGUgAAGAAKGAAAUiQAABRADiAsAATQP8EAHoAEAIMuAIABP8DAAQR/wMAU2V0Q29yZUd1aUVuYWJsZWQEBP8DAEVudW0EC/8DAENvcmVHdWlUeXBlBAT/AwBDaGF0/wkAvf8FAK4AAAMMCP8IABz/BwAQACT/BQAJ/wMAVBD/BAAIADAANhD/BAAIAEAANhD/BAASAaAADMgFADcAHTDQACsoAABLABhY0AAteAAANgAEIPAALngAACgAHGigAEpoAABGAAwg0ABBMAAAEQAYQGAAHggAABEAPDAgAGB4AABiACxYQABDQAAANwAwIBAAFEgAAB0AEAjwAGEQAAA+ABhIEABBaAAATQAUWDABSCgAAEwAPEAQAFZ4/wQAqgAQBQxIAgAbADxKIwAK4AEAFwDsijUAAVD/CAACIAAANwAocMAAYkAAAEMACJDQAFx4AAAoABiYgAA6aAAAXAA8SMAACCgAABIAHChAABpwAABAADSIEAFRWAAAKgAMkDAACVgAACwALHDAAEw4AAAnACSQMAE/KAAAXwAaaLAABVAAABUAODggAWI4AABcAB0YAAEYGP8EALoAQAQMuAIAOgCIQCMBITgB/wMAHgBABQyoAABiAEiAcAAFWAAACgA4kAABYEAAABMAOCCAAGBIAAArAChIIAAcUAAAMAAmWNAARCgAAF4AEIDQAFEQAAAfACAI8ABJUAAAEwAgeBABUkAAAAkABDjgAF1QAAA9AAxQMAAgWAAANQAJeCABAWAAAFsALIhQACU4AABRAByYcAA9KAAASgAMMCAALmAAAD8AGJgQAFo4AAAwACUQAAEmSAAAYgA8GDABR5j/BABaAbAADJAEABIACJgAAScQAAA1ADhIUABSUAAASQBMmNAARHgAACsAKDggADsoAAA3ACh40ABUkAAAGQAcgJAABCgAAF4ANDhAABaQAAAxAEhYEAEzkAAAPQAkMLAAOVgAAEoALCBQAB0wAAAvAEyYIAEMcP8EABH/AwBUQP8EABAAkAA2IP8EABAAoAA2IP8GABAAEyD/BAAqAEACDLAD/wMABP8DAAMIAAAwAASYEABOGAAABQA4SGAAJggAAFAABGDwAAV4AABPAAgYkABHOAAAEwAICMAAAmAAADgANBBAAE8gAAA+AEQ4MAAhaAAAUwAVOOAAI4gAAEYAOJhgAD1gAABJABhYAAFHiAAATQAYWGAASlAAAFkAIDhgACRw/wQAvgCwBAyQBAAH…
