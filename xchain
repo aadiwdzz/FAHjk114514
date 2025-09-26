@@ -56,7 +56,7 @@ local Window = Rayfield:CreateWindow({
 
    ConfigurationSaving = {
       Enabled = true,
-      FolderName = XCHain, -- Create a custom folder for your hub/game
+      FolderName = "XCHain", -- Create a custom folder for your hub/game
       FileName = "Chain script - Made by Neonicf, an ios user"
    },
 
@@ -2270,4 +2270,5 @@ local Button = Tab:CreateButton({
 		Window.ModifyTheme('Serenity')
    -- The function that takes place when the button is pressed
    end,
+
 })
